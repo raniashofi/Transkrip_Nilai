@@ -17,41 +17,86 @@ body{
 }
 
 .container{
-    max-width: 650px;
+    max-width: 1000px;
     width: 100%;
-    height: 415px;
+    height: 580px;
     background-color: white;
     display: flex;
     text-align: center;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.284), rgba(255, 255, 255, 0.223));
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    border-radius: 20px;
     border:1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    border-radius: 30px 30px 30px 30px;
-    padding: 75px;
-    margin-left: auto;
-    margin-right: auto;
+    border-radius: 20px 20px 20px 20px;
+    padding: 0px;
+    margin: auto;
     
+}
+
+.kanan{
+    display: block;
+    max-width: 400px;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-radius: 0px 20px 20px 0px;
 }
 
 .kiri{
     display: block;
-    padding-right: 50px;
-    padding-top: 30px;
-    font-size: 10px;
+    max-width: 600px;
     width: 100%;
-    align-items: center;
+    height: 100%;
+    padding: 50px;
 }
 
-input{
-    width: 200px;
+.judul{
+    margin: auto;
+    margin-top: 210px;
+    font-weight: bold;
+    font-size: 40px;
+    text-align: center;
+    color: #c6e29d;
+    margin-top: 160px;
+}
+
+.selamat{
+    display: flex;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+    color: #c6e29d;
+}
+
+.masuk{
+    margin-top: 160px;
+    color: #2f493b;
+    font-size: 12px;
+}
+
+.button{
+    margin-top: 40px;
+}
+
+button{
+    margin: auto;
+    margin-top: 20px;
+    display: block;
+    background-color: #c6e29d;
+    width: 50%;
     padding: 10px;
-    border-radius: 30px 30px 30px 30px;
-    border: 0;
+    padding-bottom: 13px;
+    padding-top: 13px;
+    border-radius: 30px;
+    border: 0px;
+    font-weight: bold;
+    color: #2f493b;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.17);
 }
 
-img{
-    width: 200px;
+button:hover{
+    background-color: #2f493b;
+    color: #c6e29d;
 }
