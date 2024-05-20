@@ -1,5 +1,5 @@
 GET http://localhost:5000/users
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsIm5hbWEiOiJDb250b2ggVXNlciIsImVtYWlsIjoiY29udG9oQGV4YW1wbGUuY29tIiwiaWF0IjoxNzE2MTgwMTgzLCJleHAiOjE3MTYxODAyMDN9.dy-Alkhlo15FxHvBU2wvpg4hTtRZ-AT0I435kj5jYxE
 ###
 
 POST http://localhost:5000/login
@@ -10,3 +10,9 @@ Content-Type: application/json
     "password" : "admin",
     "role" : "mahasiswa"
 }
+
+###
+GET http://localhost:5000/token
+
+###
+DELETE http://localhost:5000/logout
