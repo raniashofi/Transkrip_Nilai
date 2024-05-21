@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 
 router.get("/dashboard", verifyToken('admin'), async (req, res) => {
   const user = await getUser(req, res); 
-  res.render("admin/dashboard",{  user });
+  res.render("admin/dashboard",{ user });
 });
 
 export default router;

@@ -14,7 +14,7 @@ export const Login = async (req, res) => {
     });
 
     if (!user) {
-      return res.status(401).json("Email tidak ditemukan, silahkan daftar terlebih dahulu");
+      return res.status(401).json("Email tidak ditemukan");
     }
     else{
 
@@ -35,7 +35,7 @@ export const Login = async (req, res) => {
       expiresIn: "15m",
     });
     const refreshToken = jwt.sign({ userId, nama, email,role,nim_nip }, process.env.REFRESH_ACCESS_TOKEN, {
-      expiresIn: "7d",
+      expiresIn: "1d",
     });
 
     await Users.update(
@@ -83,7 +83,7 @@ export const Logout = async (req, res) => {
     });
 
     if (!user) {
-      console.log('User tidak ditemukan dengan refresh token tersebut.');
+      console.log('User tidak ditemukan dengan refresh_token tersebut.');
       return res.sendStatus(204);
     }
 
@@ -122,7 +122,7 @@ export function checkUserLoggedIn(req) {
             };
             
         } catch (error) {
-            console.error('Token invalid or expired:', error.message);
+            console.error('Token tidak valid atau expire:', error.message);
             return { user: null };
         }
     }
