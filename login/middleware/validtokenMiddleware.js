@@ -57,7 +57,8 @@ function verifyToken(role) {
         if (role && req.userRole !== role) {
           if (req.userRole === "mahasiswa") {
             return res.redirect("/home");
-          } else if (req.userRole === "dosen") {
+          } 
+          else if (req.userRole === "dosen") {
             return res.redirect("/dosen/dashboard");
           }
           else if (req.userRole === "admin") {

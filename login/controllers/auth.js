@@ -29,12 +29,12 @@ export const Login = async (req, res) => {
     const nama = user.nama;
     const email = user.email;
     const role = user.role;
-    const nim_nip = user.nim_nip;
 
-    const token = jwt.sign({ userId, nama, email,role,nim_nip }, process.env.ACCESS_TOKEN_SECRET, {
+
+    const token = jwt.sign({ userId, nama, email, role }, process.env.ACCESS_TOKEN_SECRET, {
       expiresIn: "15m",
     });
-    const refreshToken = jwt.sign({ userId, nama, email,role,nim_nip }, process.env.REFRESH_ACCESS_TOKEN, {
+    const refreshToken = jwt.sign({ userId, nama, email, role }, process.env.REFRESH_ACCESS_TOKEN, {
       expiresIn: "1d",
     });
 
@@ -59,8 +59,12 @@ export const Login = async (req, res) => {
 
     if (user.role === "mahasiswa") {
       return res.redirect("/home");
-    } else if (user.role === "admin") {
+    } 
+    else if (user.role === "admin") {
       return res.redirect("/admin/dashboard");
+    }
+    else if (user.role === "dosen") {
+      return res.redirect("/dosen/dashboard");
     }
   }
   } catch (error) {

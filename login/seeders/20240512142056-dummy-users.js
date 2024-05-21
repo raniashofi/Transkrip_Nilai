@@ -6,18 +6,18 @@ const { QueryTypes } = require('sequelize');
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     // Hash the password
-    const hashedPassword = await bcrypt.hash('admin', 10);
+    const hashedPassword = await bcrypt.hash('sisteminformasi', 10);
     const currentDate = Sequelize.literal('CURRENT_TIMESTAMP');
 
     return queryInterface.bulkInsert('users', [
       {
-        email: 'contoh@example.com',
+        email: 'admin@unand.ac.id',
         password: hashedPassword,
-        role : 'mahasiswa', 
-        nama: 'Contoh User',
-        nim_nip: '123456',
-        fakultas: 'Fakultas Contoh',
-        jurusan: 'Jurusan Contoh',
+        role : 'admin', 
+        nama: 'admin jurusan',
+        nim_nip: '',
+        fakultas: 'FTI',
+        jurusan: 'Sistem Informasi',
         createdAt : currentDate,
         updatedAt : currentDate,
 
