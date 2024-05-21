@@ -6,23 +6,23 @@ function verifyToken(role) {
     const refreshToken = req.cookies.refreshToken;
 
     if (!refreshToken) {
-      console.log("No refresh token found, redirecting to login");
+      console.log("refresh_token tidak ditemukan, kembali ke login");
       return res.redirect('/login');
     }
 
     if (!accessToken) {
-      console.log("No access token found, redirecting to login");
+      console.log("access_token tidak ditemukan, kembali ke login");
       return res.redirect('/login');
     }
 
     jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
       if (err) {
         if (err.name === 'TokenExpiredError') {
-          console.log("Access token expired, verifying refresh token");
+          console.log("Access token sudah expire, verifikasi refresh_token");
 
           jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decodedRefresh) => {
             if (err) {
-              console.log("Refresh token verification failed:", err);
+              console.log("Verifikasi refresh_token gagal:", err);
               return res.redirect('/login');
             }
 
@@ -30,7 +30,7 @@ function verifyToken(role) {
               expiresIn: '15m'
             });
 
-            console.log("New access token generated:", newAccessToken);
+            console.log("Access_token baru dibuat:", newAccessToken);
 
             res.cookie('token', newAccessToken, { httpOnly: true, secure: true });
 
@@ -47,7 +47,7 @@ function verifyToken(role) {
             return next();
           });
         } else {
-          console.log("Access token verification failed:", err);
+          console.log("Verifikasi access_token gagal:", err);
           return res.status(403).json({ message: "Token akses tidak valid" });
         }
       } else {

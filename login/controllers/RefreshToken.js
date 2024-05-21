@@ -13,7 +13,7 @@ export const refreshToken = async (req, res) => {
     });
 
     if (!user) {
-      console.log('User tidak ditemukan dengan refresh token tersebut');
+      console.log('User tidak ditemukan dengan refresh_token tersebut');
       return res.sendStatus(403);
     }
 
@@ -27,7 +27,7 @@ export const refreshToken = async (req, res) => {
 
       const { userId, name, email, role, nim_nip } = decoded;
       const newAccessToken = jwt.sign({ userId, name, email, role, nim_nip }, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: "10s",
+        expiresIn: "20s",
       });
 
       console.log('New access token generated:', newAccessToken);
