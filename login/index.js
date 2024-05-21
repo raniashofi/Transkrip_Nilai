@@ -6,14 +6,15 @@ import path from 'path';
 import indexRouter from "./routes/index.js";
 import mahasiswaRouter from "./routes/mahasiswa.js";
 import adminRouter from "./routes/admin.js";
+import dosenRouter from "./routes/dosen.js";
 import { fileURLToPath } from 'url';
 import bodyParser from "body-parser";
 import serveStatic from "serve-static";
 
-const __filename = fileURLToPath(import.meta.url);
-
 dotenv.config();
 const app = express();
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const __filename = fileURLToPath(import.meta.url);
 
 app.use(serveStatic('public', {
   setHeaders: function (res, path) {
@@ -25,10 +26,14 @@ app.use(serveStatic('public', {
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(process.cwd(), 'views'));
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
+
 
 app.get('/', (req, res) => {
   res.render('login')
+});
+
+app.get('/dashboard', (req, res) => {
+  res.render('dashboard');
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -42,6 +47,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', indexRouter);
 app.use('/', mahasiswaRouter);
 app.use('/admin', adminRouter);
+app.use('/dosen', dosenRouter);
 
 app.use((req, res, next) => {
   const refreshToken = req.cookies.refreshToken;
