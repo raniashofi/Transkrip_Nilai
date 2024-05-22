@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Mahasiswa</title>
+    <title>Login</title>
     <link rel="stylesheet" href="/login.css">
 </head>
 <body>
@@ -20,6 +20,11 @@
                 <h4>Password</h4>
                 <input type="password" placeholder="masukkan password" name="password">
                 <button type="submit">Login</button>
+                <br>
+                <br>
+                <% if (typeof error !== 'undefined' && error) { %>
+                    <p style="color: red;"><%= error %></p>
+                  <% } %>
            </div>
         </div>
     </div>

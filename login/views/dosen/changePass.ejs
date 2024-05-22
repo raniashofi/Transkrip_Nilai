@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="/dashdosen.css">
+</html>
+    <title>Profile Mahasiswa</title>
+    <link rel="stylesheet" href="/changePassDosen.css">
 </head>
 <body>
     <div class="sidebar">
@@ -25,7 +21,28 @@
         </div>
     </div>
     <div class="container">
+        <div class="profile-card">
+            <div class="profile-header">Password</div>
+            <div class="kanan">
+                <form action="/dosen/changePass" method="POST">
+                    <div class="profile-field">
+                        <label>Password Saat Ini</label><br>
+                        <input type="password" placeholder="masukkan password" name="currentPassword" required>
+                    </div>
+                    <div class="profile-field">
+                        <label>Password Baru</label><br>
+                        <input type="password" placeholder="masukkan password baru" name="newPassword" required>
+                    </div>
+                    <div class="profile-field">
+                        <label>Konfirmasi Password</label><br>
+                        <input type="password" placeholder="masukkan password baru" name="confirmPassword" required>
+                    </div>
+                    <button class="ubah" type="submit">Simpan Perubahan</button>
+                </form>
+            </div>
+        </div>
     </div>
+
     <script>
         function logout() {
             fetch('/logout', {
@@ -45,3 +62,4 @@
     </script>
 </body>
 </html>
+    

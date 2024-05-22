@@ -36,6 +36,10 @@ app.get('/dashboard', (req, res) => {
   res.render('dashboard');
 });
 
+app.get('/profile', (req, res) => {
+  res.render('profile');
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors({credentials:true, origin:'http://localhost:5000'}));
 app.use(cookieParser());
@@ -45,7 +49,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/', indexRouter);
-app.use('/', mahasiswaRouter);
+app.use('/mahasiswa', mahasiswaRouter);
 app.use('/admin', adminRouter);
 app.use('/dosen', dosenRouter);
 

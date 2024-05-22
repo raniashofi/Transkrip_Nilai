@@ -54,7 +54,7 @@ body{
     height: 32px;
     border-radius: 0px 6px 6px 0px;
     margin-left: 0px;
-    margin-top: -86.5%;
+    margin-top: -106.5%;
     position: absolute;
     z-index: 2;
 
@@ -105,4 +105,10 @@ a{
 .jurusan{
     margin-left: 36px;
     margin-top: 7px;
+}
+
+span{
+    color: #c6e29d;
+    margin-left: 11px;
+    margin-top: 5px;
 }
