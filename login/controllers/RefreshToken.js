@@ -19,16 +19,17 @@ export const refreshToken = async (req, res) => {
 
     console.log('User ditemukan:', user);
 
-    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
+    jwt.verify(refreshToken, process.env.REFRESH_ACCESS_TOKEN, (err, decoded) => {
       if (err) {
         console.log('Verifikasi refresh token gagal:', err);
         return res.sendStatus(403);
       }
 
-      const { userId, name, email, role, nim_nip } = decoded;
-      const newAccessToken = jwt.sign({ userId, name, email, role, nim_nip }, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: "20s",
+      const { userId, nama, email, role, nim_nip } = decoded;
+      const newAccessToken = jwt.sign({ userId, nama, email, role, nim_nip }, process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: "20s",
       });
+
 
       console.log('New access token generated:', newAccessToken);
 

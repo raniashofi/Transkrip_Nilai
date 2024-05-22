@@ -1,22 +1,23 @@
-</html>
-    <title>Profile</title>
-    <link rel="stylesheet" href="/profileAdmin.css">
-    <style>
-        
-    </style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/profileDosen.css">
 </head>
 <body>
     <div class="sidebar">
         <div class="circle"></div>
         <div class="keterangan">
-            <a href="/admin/profile">
-                <span class="link"><%= user.jurusan %></span>
-                </a>
+            <a href="/dosen/profile">
+                <div class="nama"><%= user.nama %></div>
+                <div class="nim"><%= user.nim_nip %></div>
+            </a>
         </div>
         <div class="isi">
             <a href=""><h4 class="dashboard">Dashboard</h4></a><br>
-            <a href=""><h4>Pengelolaan</h4></a><br>
-            <a href=""><h4>History</h4></a><br>
+            <a href=""><h4>Nilai</h4></a><br>
             <form id="logoutForm" action="/logout" method="POST">
                 <button type="submit" onclick="logout()" style="background:none; border:none; cursor:pointer;"><h4>Logout</h4></button>
             </form>
@@ -35,6 +36,10 @@
                 <span><%= user.email %></span>
             </div>
             <div class="profile-field">
+                <label>NIP:</label>
+                <span><%= user.nim_nip %></span>
+            </div>
+            <div class="profile-field">
                 <label>Fakultas:</label>
                 <span><%= user.fakultas %></span>
             </div>
@@ -42,8 +47,11 @@
                 <label>Jurusan:</label>
                 <span><%= user.jurusan %></span>
             </div>
-        </div>
+            <a href="/dosen/profile/changePass">
+                <button class="ubah"> Ubah Password</button>
+            </a>
     </div>
+
     <script>
         function logout() {
             fetch('/logout', {
@@ -63,4 +71,3 @@
     </script>
 </body>
 </html>
-    

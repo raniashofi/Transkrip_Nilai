@@ -1,0 +1,68 @@
+</html>
+    <title>Profile Mahasiswa</title>
+    <link rel="stylesheet" href="/changePassMhs.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="circle"></div>
+        <div class="keterangan">
+            <a href="/mahasiswa/profile">
+                <div class="nama"><%= user.nama %></div>
+                <div class="nim"><%= user.nim_nip %></div>
+            </a>
+        </div>
+        <div class="isi">
+            <a href=""><h4 class="dashboard">Dashboard</h4></a><br>
+            <a href=""><h4>Pengajuan</h4></a><br>
+            <a href=""><h4>Notifikasi</h4></a><br>
+            <a href=""><h4>Status</h4></a><br>
+            <a href=""><h4>History</h4></a><br>
+            <form id="logoutForm" action="/logout" method="POST">
+                <button type="submit" onclick="logout()" style="background:none; border:none; cursor:pointer;"><h4>Logout</h4></button>
+            </form>
+            <div class="titik"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="profile-card">
+            <div class="profile-header">Password</div>
+            <div class="kanan">
+                <form action="/mahasiswa/changePass" method="POST">
+                    <div class="profile-field">
+                        <label>Password Saat Ini</label><br>
+                        <input type="password" placeholder="masukkan password" name="currentPassword" required>
+                    </div>
+                    <div class="profile-field">
+                        <label>Password Baru</label><br>
+                        <input type="password" placeholder="masukkan password baru" name="newPassword" required>
+                    </div>
+                    <div class="profile-field">
+                        <label>Konfirmasi Password</label><br>
+                        <input type="password" placeholder="masukkan password baru" name="confirmPassword" required>
+                    </div>
+                    <button class="ubah" type="submit">Simpan Perubahan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            fetch('/logout', {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/login'; // Redirect to login page after successful logout
+                } else {
+                    throw new Error('Failed to logout');
+                }
+            })
+            .catch(error => {
+                console.error('Logout failed:', error);
+            });
+        }
+    </script>
+</body>
+</html>
+    

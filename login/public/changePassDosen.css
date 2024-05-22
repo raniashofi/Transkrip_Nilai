@@ -103,10 +103,66 @@ a{
     margin-left: 49px;
 }
 
+.profile-card {
+    padding: 20px;
+    margin-left: 600px;
+    margin-top: 200px;
+    background-color: #c6e29d;
+    max-width: 100%;
+    width: 520px;
+    border-radius: 20px;
+}
+.profile-header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    z-index: 2;
+    margin-bottom: 30px;
+}
+.profile-field {
+    margin-bottom: 20px;
+    z-index: 2;
+}
+.profile-field label {
+    font-weight: bold;
+}
+
+.ubah{
+    margin-left: 300px;
+    margin-top: 40px;
+    display: block;
+    background-color: #536653;
+    width: 35%;
+    padding: 10px;
+    padding-bottom: 13px;
+    padding-top: 13px;
+    border-radius: 30px;
+    border: 0px;
+    font-weight: bold;
+    color: #c6e29d;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.17);
+}
+
+.ubah:hover{
+    color: #c6e29d;
+    background-color: #233323;
+}
+
+input{
+    width: 100%;
+    max-width: 270px;
+    padding: 7px;
+    border-radius: 10px;
+    border-color: #233323;
+    border-style: double ;
+    margin-top: 5px;
+}
+
 .nim{
     margin-left: 45px;
 }
 
 .nama{
-    margin-left: -15px
+    margin-left: -15px;
 }
+

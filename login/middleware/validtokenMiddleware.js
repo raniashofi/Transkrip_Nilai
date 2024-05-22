@@ -20,28 +20,31 @@ function verifyToken(role) {
         if (err.name === 'TokenExpiredError') {
           console.log("Access token sudah expire, verifikasi refresh_token");
 
-          jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decodedRefresh) => {
+          jwt.verify(refreshToken, process.env.REFRESH_ACCESS_TOKEN, (err, decodedRefresh) => {
             if (err) {
               console.log("Verifikasi refresh_token gagal:", err);
               return res.redirect('/login');
             }
 
-            const newAccessToken = jwt.sign({ userId: decodedRefresh.userId, role: decodedRefresh.role }, process.env.ACCESS_TOKEN_SECRET, {
+            const newAccessToken = jwt.sign({ userId: decodedRefresh.userId, role: decodedRefresh.role, nim_nip: decodedRefresh.nim_nip }, process.env.ACCESS_TOKEN_SECRET, {
               expiresIn: '15m'
             });
 
             console.log("Access_token baru dibuat:", newAccessToken);
 
-            res.cookie('token', newAccessToken, { httpOnly: true, secure: true });
+            res.cookie('token', newAccessToken, { httpOnly: true, secure: false });
 
             req.userId = decodedRefresh.userId;
             req.userRole = decodedRefresh.role;
+            req.userNim_nip = decodedRefresh.nim_nip;
 
             if (role && req.userRole !== role) {
               if (req.userRole === "mahasiswa") {
                 return res.redirect("/home");
               } else if (req.userRole === "admin") {
                 return res.redirect("/admin/dashboard");
+              } else if (req.userRole === "dosen") {
+                return res.redirect("/dosen/dashboard");
               }
             }
             return next();
@@ -53,6 +56,7 @@ function verifyToken(role) {
       } else {
         req.userId = decoded.userId;
         req.userRole = decoded.role;
+        req.usernim_nip = decoded.nim_nip;
 
         if (role && req.userRole !== role) {
           if (req.userRole === "mahasiswa") {
