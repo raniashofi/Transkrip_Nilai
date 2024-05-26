@@ -10,17 +10,6 @@ import dosenRouter from "./routes/dosen.js";
 import { fileURLToPath } from 'url';
 import bodyParser from "body-parser";
 import serveStatic from "serve-static";
-import db from "./config/database.js"
-
-try {
-  await db.authenticate();
-    console.log('database connected');
-
-  await db.sync();
-    console.log('Database synchronized.');
-} catch (error) {
-  console.error(error);
-}
 
 dotenv.config();
 const app = express();
@@ -49,6 +38,10 @@ app.get('/dashboard', (req, res) => {
 
 app.get('/profile', (req, res) => {
   res.render('profile');
+});
+
+app.get('/nilai', (req, res) => {
+  res.render('nilai');
 });
 
 app.use(express.static(path.join(__dirname, 'public')));

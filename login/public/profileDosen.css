@@ -28,7 +28,7 @@
 
         .sidebar{
             margin-left: 15px;
-            max-width: 250px;
+            max-width: 220px;
             width: 100%;
             height: 93%;
             background-color: #233323;
@@ -37,13 +37,22 @@
         }
 
         .circle {
-            height: 90px;
-            width: 90px;
+            height: 75px;
+            width: 75px;
             background-color: #ffffff;
             border-radius: 50%;
+        }
+
+        .contcircle{
             position: absolute;
-            margin-top: 40px;
-            margin-left: 78px;
+            width: 100%;
+            max-width: 220px;
+            display: flex;
+            justify-content: center; 
+            align-items: center;     
+            text-align: center;     
+            height: 100%;   
+            margin-top: -280px;
         }
 
         .titik{
@@ -53,8 +62,7 @@
             max-height: 100%;
             height: 32px;
             border-radius: 0px 6px 6px 0px;
-            margin-left: 0px;
-            margin-top: -83.5%;
+            margin-top: -145px;
             position: absolute;
             z-index: 2;
         
@@ -85,6 +93,11 @@
         .isi{
             margin-top: 240px;
             position: absolute;
+            justify-content: center; 
+            align-items: center;     
+            text-align: center;  
+            width: 100%;
+            max-width: 220px;
         }
 
         .container{
@@ -93,14 +106,19 @@
             height: 100%;
             background-color: #ffffff6c;
             z-index: 1;
-            margin-left: -265px;
+            margin-left: -235px;
         }
 
         .keterangan{
             position: absolute;
-            margin-top: 150px;
-            color: #ffffff;
-            margin-left: 49px;
+            width: 100%;
+            max-width: 220px;
+            display: flex;
+            justify-content: center; 
+            align-items: center;     
+            text-align: center;     
+            height: 100%;   
+            margin-top: -200px;
         }
 
         .link{
@@ -134,12 +152,12 @@
             font-weight: bold;
         }
 
-        .nim{
-            margin-left: 45px;
+        .nama, .nim {
+            margin: auto;
         }
-        
-        .nama{
-            margin-left: -15px
+
+        form{
+            margin-left: -95px;
         }
 
         .ubah{
