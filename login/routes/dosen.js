@@ -1,6 +1,7 @@
 import express from "express";
 import { verifyToken } from "../middleware/validtokenMiddleware.js";
 import { getUser , getProfileDosen , changePassword } from "../controllers/auth.js";
+import { getNilai } from "../controllers/dosenController.js"
 
 const router = express.Router();
 
@@ -30,5 +31,9 @@ router.get('/profile/changePass',verifyToken('dosen'), async function (req, res)
 router.post('/changePass', verifyToken('dosen'), async (req, res) => {
   await changePassword(req, res);
 });
+
+router.get('/nilai', verifyToken('dosen'), (req, res, next) => {
+  next();
+}, getNilai);
 
 export default router;
