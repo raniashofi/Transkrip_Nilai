@@ -111,16 +111,15 @@ export const getProfileMhs = async (req, res) => {
 
     console.log('User data:', user); // Log user data to verify its content
 
-    res.render('mahasiswa/profile', {
-      user: {
-        nama: user.nama,
-        email: user.email,
-        role: user.role,
-        nim_nip: user.nim_nip,
-        fakultas: user.fakultas,
-        jurusan: user.jurusan
-      }
-    });
+    return {
+      nama: user.nama,
+      email: user.email,
+      role: user.role,
+      nim_nip: user.nim_nip,
+      fakultas: user.fakultas,
+      jurusan: user.jurusan
+    };
+    
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });
