@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="/dashdosen.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="contcircle">
+        <div class="circle"></div>
+      </div>
+      <div class="keterangan">
+        <a href="/dosen/profile">
+          <div class="nama"><%= user.nama %></div>
+          <div class="nim"><%= user.nim_nip %></div>
+        </a>
+      </div>
+      <div class="isi">
+        <a href="/dosen/dashboard"><h4 class="dashboard">Dashboard</h4></a
+        ><br />
+        <a href="/dosen/nilai"><h4>Nilai</h4></a><br />
+        <form id="logoutForm" action="/logout" method="POST">
+          <button
+            type="submit"
+            onclick="logout()"
+            style="background: none; border: none; cursor: pointer"
+          >
+            <h4>Logout</h4>
+          </button>
+        </form>
+        <div class="titik"></div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="container2">
+        <h1>Selamat Datang!</h1>
+        <h3>Silahkan masukkan nilai mahasiswa</h3>
+        <a href="/dosen/nilai"><button class="mulai">mulai</button></a>
+      </div>
+    </div>
+    <script>
+      function logout() {
+        fetch("/logout", {
+          method: "POST",
+        })
+          .then((response) => {
+            if (response.ok) {
+              window.location.href = "/login"; // Redirect to login page after successful logout
+            } else {
+              throw new Error("Failed to logout");
+            }
+          })
+          .catch((error) => {
+            console.error("Logout failed:", error);
+          });
+      }
+    </script>
+  </body>
+</html>
