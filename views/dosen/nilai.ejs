@@ -34,49 +34,79 @@
                 <input type="text" placeholder="Cari..." id="search">
             </div>
 
-            <form action="#">
-                <select name="" id="tahunajaran">
-                    <option value="">-- Select tahun ajaran --</option>
+            <form action="/dosen/nilai" method="GET" id="form">
+                <select name="tahunAjaran">
+                    <% listTahunAjaran.forEach(function(tahunAjaran) { %>
+                    <option
+                        value="<%= tahunAjaran.tahun_ajaran %>"
+                        <%= tahunAjaran.tahun_ajaran === selectedTahunAjaran ? 'selected' : '' %>>
+                        <%= tahunAjaran.tahun_ajaran %>
+                    </option>
+                    <% }) %>
                 </select>
-                <select name="" id="matakuliah">
-                    <option value="">-- Select matakuliah --</option>
+                <br />
+                <h1>Pilih mata kuliah</h1>
+                <select name="mataKuliah">
+                    <% listMataKuliah.forEach(function(mataKuliah) { %>
+                    <option
+                        value="<%= mataKuliah.kode_matkul %>"
+                        <%= mataKuliah.kode_matkul === selectedMataKuliah ? 'selected' : '' %>>
+                        <%= mataKuliah.nama_matkul %>
+                    </option>
+                    <% }) %>
                 </select>
-                <select name="" id="kodematakuliah">
-                    <option value="">-- Select kode matakuliah --</option>
-                </select>
+                <br />
+    
+                <script>
+                    const form = document.getElementById('form');
+                    form.addEventListener('change', function() {
+                        form.submit();
+                    });
+                </script>
             </form>
-                
-            <!-- Tabel untuk Menampilkan Daftar Mahasiswa -->
+    
+            <h1>Data Mahasiswa</h1>
             <table>
                 <thead>
                     <tr>
-                        <th class="kiri">NIM</th>
-                        <th class="tengah">Nama</th>
-                        <th class="kanan">Nilai Huruf</th>
+                        <th>NIP</th>
+                        <th>Nama Mahasiswa</th>
+                        <th>Fakultas</th>
+                        <th>Jurusan</th>
+                        <th>Jumlah SKS</th>
+                        <th>Nilai Mutu</th>
+                        <th>Nilai Huruf</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <% listTranskip?.forEach(function(transkrip) { %>
                     <tr>
-                        <td>123456</td>
-                        <td>John Doe</td>
-                        <td><select name="" id="nilai">
-                            <option value="">-- Select nilai --</option>
-                        </select></td>
+                        <td><%= transkrip.nim_nip %></td>
+                        <td><%= transkrip.User.nama %></td>
+                        <td><%= transkrip.User.fakultas %></td>
+                        <td><%= transkrip.User.jurusan %></td>
+                        <td><%= transkrip.MataKuliah.sks %></td>
+                        <td><%= transkrip.nilai_mutu %></td>
+                        <td>
+                            <form action="/dosen/nilai/<%= transkrip.nim_nip %>" method="POST">
+                                <input type="hidden" name="kode_matkul" value="<%= transkrip.kode_matkul %>" />
+                                <input type="hidden" name="tahun_ajaran" value="<%= transkrip.tahun_ajaran %>" />
+                                
+                                <label for="nilai_huruf">
+                                    <span>Nilai Huruf</span>
+                                    <select name="nilai_huruf">
+                                        <% ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'D', 'E'].forEach(function(nilai_huruf) { %>
+                                            <option value="<%= nilai_huruf %>" <%= transkrip.nilai_huruf === nilai_huruf ? 'selected' : '' %>>
+                                                <%= nilai_huruf %>
+                                            </option>
+                                        <% }) %>
+                                    </select>
+                                </label>
+                                <input type="submit" value="Update" />
+                            </form>
+                        </td>
                     </tr>
-                    <tr>
-                        <td>654321</td>
-                        <td>Jane Smith</td>
-                        <td><select name="" id="nilai">
-                            <option value="">-- Select nilai --</option>
-                        </select></td>
-                    </tr>
-                    <tr>
-                        <td>789012</td>
-                        <td>James Bond</td>
-                        <td><select name="" id="nilai">
-                            <option value="">-- Select nilai --</option>
-                        </select></td>
-                    </tr>
+                    <% }) %>
                 </tbody>
             </table>
     </div>
