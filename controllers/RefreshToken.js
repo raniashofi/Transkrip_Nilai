@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const Users = require("../models/UserModel.js");
+const {User} = require("../models/index");
 
 exports.refreshToken = async (req, res) => {
   try {
@@ -8,7 +8,7 @@ exports.refreshToken = async (req, res) => {
 
     console.log("Received refresh token:", refreshToken);
 
-    const user = await Users.findOne({
+    const user = await User.findOne({
       where: { refresh_token: refreshToken },
     });
 

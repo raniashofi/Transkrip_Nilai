@@ -1,17 +1,20 @@
-const Sequelize = require("sequelize");
-
-const TahunAjaran = db.define(
-  "tahunAjaran",
-  {
+'use strict';
+const { Model } = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class TahunAjaran extends Model {
+    static associate(models) {
+      TahunAjaran.hasMany(models.Transkrip, { foreignKey: 'tahun_ajaran' });
+    }
+  }
+  TahunAjaran.init({
     tahun_ajaran: {
       allowNull: false,
       primaryKey: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
-  },
-  {
-    freezeTableName: true,
-  }
-);
-
-module.exports = TahunAjaran;
+  }, {
+    sequelize,
+    modelName: 'TahunAjaran',
+  });
+  return TahunAjaran;
+};

@@ -32,10 +32,7 @@ router.get("/profile", verifyToken("mahasiswa"), async (req, res) => {
   }
 });
 
-router.get(
-  "/profile/changePass",
-  verifyToken("mahasiswa"),
-  async function (req, res) {
+router.get("/profile/changePass", verifyToken("mahasiswa"), async function (req, res) {
     const user = await getUser(req, res);
     res.render("mahasiswa/changePass", { user });
   }

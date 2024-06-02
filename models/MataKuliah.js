@@ -1,23 +1,27 @@
-const Sequelize = require("sequelize");
-
-const MataKuliah = db.define(
-  "mataKuliah",
-  {
+'use strict';
+const { Model } = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class MataKuliah extends Model {
+    static associate(models) {
+      MataKuliah.hasMany(models.Transkrip, { foreignKey: 'kode_matkul' });
+      MataKuliah.hasMany(models.DetailMataKuliah, { foreignKey: 'kode_matkul' });
+    }
+  }
+  MataKuliah.init({
     kode_matkul: {
       allowNull: false,
       primaryKey: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     nama_matkul: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     sks: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     },
-  },
-  {
-    freezeTableName: true,
-  }
-);
-
-module.exports = MataKuliah;
+  }, {
+    sequelize,
+    modelName: 'MataKuliah',
+  });
+  return MataKuliah;
+};

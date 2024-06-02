@@ -1,12 +1,12 @@
-const Users = require("../models/UserModel.js");
+const {User, } = require("../models/index");
 
 exports.getNilai = async (req, res) => {
   try {
     // Assuming user ID is stored in req.userId (this would typically come from a middleware that verifies the JWT)
-    const userId = req.userId;
+    const nim_nip = req.userNim_nip;
 
-    const user = await Users.findOne({
-      where: { id: userId },
+    const user = await User.findOne({
+      where: { nim_nip: nim_nip },
     });
 
     if (!user) {
@@ -22,3 +22,7 @@ exports.getNilai = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+
+

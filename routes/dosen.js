@@ -5,7 +5,7 @@ const {
   getProfileDosen,
   changePassword,
 } = require("../controllers/auth.js");
-const { getNilai } = require("../controllers/dosenController.js");
+const { getNilai, inputNilaiMahasiswa, saveNilaiMahasiswa } = require("../controllers/dosenController.js");
 
 const router = express.Router();
 
@@ -23,10 +23,7 @@ router.get("/dashboard", verifyToken("dosen"), async (req, res) => {
   }
 });
 
-router.get(
-  "/profile",
-  verifyToken("dosen"),
-  (req, res, next) => {
+router.get("/profile", verifyToken("dosen"), (req, res, next) => {
     next();
   },
   getProfileDosen
@@ -45,13 +42,12 @@ router.post("/changePass", verifyToken("dosen"), async (req, res) => {
   await changePassword(req, res);
 });
 
-router.get(
-  "/nilai",
-  verifyToken("dosen"),
-  (req, res, next) => {
+router.get("/nilai", verifyToken("dosen"), (req, res, next) => {
     next();
   },
   getNilai
 );
+
+
 
 module.exports = router;
