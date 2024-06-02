@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const Users = require("../models/UserModel.js");
+const {User} = require("../models/index");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 
@@ -7,7 +7,7 @@ dotenv.config();
 
 exports.Login = async (req, res) => {
   try {
-    const user = await Users.findOne({
+    const user = await User.findOne({
       where: {
         email: req.body.email,
       },
@@ -23,7 +23,6 @@ exports.Login = async (req, res) => {
       return res.render("login", { error: "Password salah!" });
     }
 
-    const userId = user.id;
     const nama = user.nama;
     const email = user.email;
     const role = user.role;
@@ -32,27 +31,27 @@ exports.Login = async (req, res) => {
     const fakultas = user.fakultas;
 
     const token = jwt.sign(
-      { userId, nama, email, role, nim_nip, jurusan, fakultas },
+      { nama, email, role, nim_nip, jurusan, fakultas },
       process.env.ACCESS_TOKEN_SECRET,
       {
         expiresIn: "15m",
       }
     );
     const refreshToken = jwt.sign(
-      { userId, nama, email, role, nim_nip, jurusan, fakultas },
+      { nama, email, role, nim_nip, jurusan, fakultas },
       process.env.REFRESH_ACCESS_TOKEN,
       {
         expiresIn: "1d",
       }
     );
 
-    await Users.update(
+    await User.update(
       {
         refresh_token: refreshToken,
       },
       {
         where: {
-          id: userId,
+          nim_nip: nim_nip,
         },
       }
     );
@@ -81,10 +80,10 @@ exports.Login = async (req, res) => {
 exports.getProfile = async (req, res) => {
   try {
     // Assuming user ID is stored in req.userId (this would typically come from a middleware that verifies the JWT)
-    const userId = req.userId;
+    const nim_nip = req.userNim_nip;
 
-    const user = await Users.findOne({
-      where: { id: userId },
+    const user = await User.findOne({
+      where: { nim_nip: nim_nip },
     });
 
     if (!user) {
@@ -103,9 +102,9 @@ exports.getProfile = async (req, res) => {
 
 exports.getProfileMhs = async (req, res) => {
   try {
-    const userId = req.userId;
-    const user = await Users.findOne({
-      where: { id: userId },
+    const nim_nip = req.userNim_nip;
+    const user = await User.findOne({
+      where: { nim_nip: nim_nip },
     });
 
     if (!user) {
@@ -130,9 +129,9 @@ exports.getProfileMhs = async (req, res) => {
 
 exports.getProfileDosen = async (req, res) => {
   try {
-    const userId = req.userId;
-    const user = await Users.findOne({
-      where: { id: userId },
+    const nim_nip = req.userNim_nip;
+    const user = await User.findOne({
+      where: { nim_nip: nim_nip },
     });
 
     if (!user) {
@@ -167,7 +166,7 @@ exports.changePassword = async (req, res) => {
       });
     }
 
-    const user = await Users.findByPk(req.userId);
+    const user = await User.findByPk(req.userId);
     if (!user) {
       return res.status(404).json({ message: "Pengguna tidak ditemukan" });
     }
@@ -214,7 +213,6 @@ exports.checkUserLoggedIn = function (req) {
         process.env.REFRESH_ACCESS_TOKEN
       );
       user = {
-        userId: decoded.userId,
         nama: decoded.nama,
         email: decoded.email,
         role: decoded.role,

@@ -31,7 +31,6 @@ function verifyToken(role) {
 
               const newAccessToken = jwt.sign(
                 {
-                  userId: decodedRefresh.userId,
                   role: decodedRefresh.role,
                   nim_nip: decodedRefresh.nim_nip,
                 },
@@ -48,7 +47,6 @@ function verifyToken(role) {
                 secure: false,
               });
 
-              req.userId = decodedRefresh.userId;
               req.userRole = decodedRefresh.role;
               req.userNim_nip = decodedRefresh.nim_nip;
 
@@ -69,9 +67,8 @@ function verifyToken(role) {
           return res.status(403).json({ message: "Token akses tidak valid" });
         }
       } else {
-        req.userId = decoded.userId;
         req.userRole = decoded.role;
-        req.usernim_nip = decoded.nim_nip;
+        req.userNim_nip = decoded.nim_nip;
 
         if (role && req.userRole !== role) {
           if (req.userRole === "mahasiswa") {
