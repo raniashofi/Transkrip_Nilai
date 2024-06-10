@@ -1,6 +1,10 @@
 const express = require('express');
 const verifyToken = require('../middleware/validtokenMiddleware.js');
-const { getUser, getProfileDosen, changePassword } = require('../controllers/auth.js');
+const {
+	getUser,
+	getProfileDosen,
+	changePassword,
+} = require('../controllers/auth.js');
 const { getNilai, updateNilai } = require('../controllers/dosenController.js');
 
 const router = express.Router();
@@ -21,16 +25,20 @@ router.get('/dashboard', verifyToken('dosen'), async (req, res) => {
 
 router.get('/profile', verifyToken('dosen'), getProfileDosen);
 
-router.get('/profile/changePass', verifyToken('dosen'), async function (req, res) {
-	const user = await getUser(req, res);
-	res.render('dosen/changePass', { user });
-});
+router.get(
+	'/profile/changePass',
+	verifyToken('dosen'),
+	async function (req, res) {
+		const user = await getUser(req, res);
+		res.render('dosen/changePass', { user });
+	}
+);
 
 router.post('/changePass', verifyToken('dosen'), async (req, res) => {
 	await changePassword(req, res);
 });
 
 router.get('/nilai', verifyToken('dosen'), getNilai);
-router.post('/nilai/:nim_nip', verifyToken('dosen'), updateNilai);
+router.post('/nilai', verifyToken('dosen'), updateNilai);
 
 module.exports = router;

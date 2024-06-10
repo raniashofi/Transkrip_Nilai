@@ -34,81 +34,88 @@
                 <input type="text" placeholder="Cari..." id="search">
             </div>
 
-            <form action="/dosen/nilai" method="GET" id="form">
-                <select name="tahunAjaran">
-                    <% listTahunAjaran.forEach(function(tahunAjaran) { %>
-                    <option
-                        value="<%= tahunAjaran.tahun_ajaran %>"
-                        <%= tahunAjaran.tahun_ajaran === selectedTahunAjaran ? 'selected' : '' %>>
-                        <%= tahunAjaran.tahun_ajaran %>
-                    </option>
-                    <% }) %>
-                </select>
-                <br />
-                <h1>Pilih mata kuliah</h1>
-                <select name="mataKuliah">
-                    <% listMataKuliah.forEach(function(mataKuliah) { %>
-                    <option
-                        value="<%= mataKuliah.kode_matkul %>"
-                        <%= mataKuliah.kode_matkul === selectedMataKuliah ? 'selected' : '' %>>
-                        <%= mataKuliah.nama_matkul %>
-                    </option>
-                    <% }) %>
-                </select>
-                <br />
-    
-                <script>
-                    const form = document.getElementById('form');
-                    form.addEventListener('change', function() {
-                        form.submit();
-                    });
-                </script>
-            </form>
-    
-            <h1>Data Mahasiswa</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>NIP</th>
-                        <th>Nama Mahasiswa</th>
-                        <th>Fakultas</th>
-                        <th>Jurusan</th>
-                        <th>Jumlah SKS</th>
-                        <th>Nilai Mutu</th>
-                        <th>Nilai Huruf</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% listTranskip?.forEach(function(transkrip) { %>
-                    <tr>
-                        <td><%= transkrip.nim_nip %></td>
-                        <td><%= transkrip.User.nama %></td>
-                        <td><%= transkrip.User.fakultas %></td>
-                        <td><%= transkrip.User.jurusan %></td>
-                        <td><%= transkrip.MataKuliah.sks %></td>
-                        <td><%= transkrip.nilai_mutu %></td>
-                        <td>
-                            <form action="/dosen/nilai/<%= transkrip.nim_nip %>" method="POST">
-                                <input type="hidden" name="kode_matkul" value="<%= transkrip.kode_matkul %>" />
-                                <input type="hidden" name="tahun_ajaran" value="<%= transkrip.tahun_ajaran %>" />
-                                
-                                <label for="nilai_huruf">
-                                    <span>Nilai Huruf</span>
-                                    <select name="nilai_huruf">
-                                        <% ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'D', 'E'].forEach(function(nilai_huruf) { %>
-                                            <option value="<%= nilai_huruf %>" <%= transkrip.nilai_huruf === nilai_huruf ? 'selected' : '' %>>
-                                                <%= nilai_huruf %>
-                                            </option>
-                                        <% }) %>
-                                    </select>
-                                </label>
-                                <input type="submit" value="Update" />
-                            </form>
-                        </td>
-                    </tr>
-                    <% }) %>
-                </tbody>
-            </table>
+            <div class="judul1">
+                <h3>Tahun Ajaran</h3>
+            </div>
+
+    <form action="/dosen/nilai" method="GET" id="form">
+        <div class="tahunAjaran">
+        <select name="tahunAjaran">
+            <% listTahunAjaran.forEach(function(tahunAjaran) { %>
+            <option value="<%= tahunAjaran.tahun_ajaran %>" <%= tahunAjaran.tahun_ajaran === selectedTahunAjaran ? 'selected' : '' %>>
+                <%= tahunAjaran.tahun_ajaran %>
+            </option>
+            <% }) %>
+        </select>
+        </div>
+
+        <br />
+
+        <div class="judul2">
+            <h3>Mata Kuliah</h3>
+        </div>
+        <div class="mataKuliah">
+        <select name="mataKuliah">
+            <% listMataKuliah.forEach(function(mataKuliah) { %>
+            <option value="<%= mataKuliah.kode_matkul %>" <%= mataKuliah.kode_matkul === selectedMataKuliah ? 'selected' : '' %>>
+                <%= mataKuliah.nama_matkul %>
+            </option>
+            <% }) %>
+        </select>
+        </div>
+
+        <br />
+
+        <script>
+            const form = document.getElementById('form');
+            form.addEventListener('change', function() {
+                form.submit();
+            });
+        </script>
+    </form>
+
+    <form action="/dosen/nilai" method="POST">
+        <input type="hidden" name="kode_matkul" value="<%= selectedMataKuliah %>" />
+        <input type="hidden" name="tahun_ajaran" value="<%= selectedTahunAjaran %>" />
+
+        <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>NIM</th>
+                    <th>Nama Mahasiswa</th>
+                    <th>Nilai Huruf</th>
+                    <th>Nilai Mutu</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% listTranskip?.forEach(function(transkrip) { %>
+                <tr>
+                    <td><%= transkrip.nim_nip %></td>
+                    <td><%= transkrip.User.nama %></td>
+                    <td>
+                        <label for="<%= transkrip.nim_nip %>">
+                            <select name="<%= transkrip.nim_nip %>">
+                                <% ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'D', 'E'].forEach(function(nilai_huruf) { %>
+                                <option value="<%= nilai_huruf %>" <%= transkrip.nilai_huruf === nilai_huruf ? 'selected' : '' %>>
+                                    <%= nilai_huruf %>
+                                </option>
+                                <% }) %>
+                            </select>
+                        </label>
+                    </td>
+                    <td><%= transkrip.nilai_mutu %></td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+        <br />
+        <div class="buttonUpdate">
+        <button class="update" type="submit">Update</button>
+        </div>
+    </form>
     </div>
 </div>
 
