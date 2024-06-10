@@ -9,51 +9,52 @@ exports.getNilai = async (req, res) => {
 	try {
 		const userNim_nip = req.userNim_nip;
 
-    const user = await User.findOne({
-      where: { nim_nip: userNim_nip },
-    });
+		const user = await User.findOne({
+			where: { nim_nip: userNim_nip },
+	      });
 
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-		console.log(userNim_nip);
-		const selectedTahunAjaran = req.query.tahunAjaran || '';
-		const selectedMataKuliah = req.query.mataKuliah || '';
-
-		const listDetailMataKuliah = await DetailMataKuliah.findAll({
-			where: {
-				nim_nip: userNim_nip,
-			},
-		});
+		let { tahunAjaran, mataKuliah } = req.query;
 
 		const listTahunAjaran = await TahunAjaran.findAll();
 		const listMataKuliah = await MataKuliah.findAll({
-			where: {
-				kode_matkul: {
-					[Op.in]: listDetailMataKuliah.map((detailMataKuliah) => detailMataKuliah.kode_matkul),
+			include: [
+				{
+					model: DetailMataKuliah,
+					as: DetailMataKuliah.tableName,
+					where: {
+						nim_nip: userNim_nip,
+					},
 				},
-			},
+			],
+		}).then((listMataKuliah) => {
+			return listMataKuliah.map(({ kode_matkul, nama_matkul }) => {
+				return {
+					kode_matkul,
+					nama_matkul: `${nama_matkul} ${kode_matkul.at(-1)}`,
+				};
+			});
 		});
 
-		let listTranskip = [];
+		tahunAjaran ??= listTahunAjaran.at(0).tahun_ajaran;
+		mataKuliah ??= listMataKuliah.at(0).kode_matkul;
 
-		if (selectedTahunAjaran && selectedMataKuliah) {
+		let listTranskip = [];
+		if (tahunAjaran && mataKuliah) {
 			listTranskip = await Transkrip.findAll({
 				where: {
-					kode_matkul: selectedMataKuliah,
-					tahun_ajaran: selectedTahunAjaran,
+					kode_matkul: mataKuliah,
+					tahun_ajaran: tahunAjaran,
 				},
 				include: [User, MataKuliah],
 			});
 		}
 
 		res.render('dosen/nilai', {
-      user: user,
+			user: user,
 			listTahunAjaran,
 			listMataKuliah,
-			selectedTahunAjaran,
-			selectedMataKuliah,
+			selectedTahunAjaran: tahunAjaran,
+			selectedMataKuliah: mataKuliah,
 			listTranskip,
 		});
 	} catch (error) {
@@ -65,18 +66,10 @@ exports.getNilai = async (req, res) => {
 exports.updateNilai = async (req, res) => {
 	try {
 		const userNim_nip = req.userNim_nip;
+		const { kode_matkul, tahun_ajaran, ...rest } = req.body;
 
-		const mahasiswaNim_nip = req.params.nim_nip;
-		const { nilai_huruf, kode_matkul, tahun_ajaran } = req.body;
-
-		const detailMataKuliah = await DetailMataKuliah.findOne({
-			where: {
-				nim_nip: userNim_nip,
-				kode_matkul,
-			},
-		});
-		if (!detailMataKuliah) {
-			throw new Error('Mata Kuliah tidak ditemukan, atau Anda tidak memiliki akses untuk mengaksesnya');
+		if (Object.keys(rest).length === 0) {
+			return res.redirect('back');
 		}
 
 		const nilaiMapper = [
@@ -91,31 +84,90 @@ exports.updateNilai = async (req, res) => {
 			{ nilai_huruf: 'E', base_nilai: 1.0 },
 		];
 
-		if (!nilaiMapper.find((nilai) => nilai.nilai_huruf === nilai_huruf)) {
-			throw new Error('Nilai Huruf tidak valid');
+		// validate kode matkul
+		const detailMataKuliah = await DetailMataKuliah.findOne({
+			where: {
+				nim_nip: userNim_nip,
+				kode_matkul,
+			},
+		});
+		if (!detailMataKuliah) {
+			throw new Error(
+				'Mata Kuliah tidak ditemukan, atau dosen tidak memiliki akses untuk mengaksesnya'
+			);
 		}
 
+		// validate tahun ajaran
+		const tahunAjaran = await TahunAjaran.findOne({
+			where: {
+				tahun_ajaran,
+			},
+		});
+		if (!tahunAjaran) {
+			throw new Error('Tahun Ajaran tidak ditemukan');
+		}
+
+		// validate mata kuliah
 		const mataKuliah = await MataKuliah.findOne({
 			where: {
 				kode_matkul,
 			},
 		});
+		if (!mataKuliah) {
+			throw new Error('Mata Kuliah tidak ditemukan');
+		}
 
-		await Transkrip.update(
-			{
-				nilai_huruf,
-				nilai_mutu: nilaiMapper.find((nilai) => nilai.nilai_huruf === nilai_huruf).base_nilai * mataKuliah.sks,
-			},
-			{
-				where: {
-					kode_matkul,
-					tahun_ajaran,
-					nim_nip: mahasiswaNim_nip,
-				},
-			}
+		const listNilaiChange = [
+			...Object.entries(rest).map(([nim_nip, nilai_huruf]) => {
+				const nilai = nilaiMapper.find(
+					(nilai) => nilai.nilai_huruf === nilai_huruf
+				);
+
+				if (!nilai) {
+					throw new Error('Nilai Huruf tidak valid');
+				}
+
+				return {
+					nim_nip,
+					nilai_huruf,
+					nilai_mutu: nilai.base_nilai * mataKuliah.sks,
+				};
+			}),
+		];
+
+		await Promise.all(
+			listNilaiChange.map(
+				async ({ nim_nip, nilai_huruf, nilai_mutu }) => {
+					const transkrip = await Transkrip.findOne({
+						where: {
+							kode_matkul,
+							tahun_ajaran,
+							nim_nip,
+						},
+					});
+
+					if (!transkrip) {
+						throw new Error('Transkrip tidak ditemukan');
+					}
+
+					await Transkrip.update(
+						{
+							nilai_huruf,
+							nilai_mutu,
+						},
+						{
+							where: {
+								kode_matkul,
+								tahun_ajaran,
+								nim_nip,
+							},
+						}
+					);
+				}
+			)
 		);
 
-		res.redirect('/dosen/nilai?tahunAjaran=' + tahun_ajaran + '&mataKuliah=' + kode_matkul);
+		return res.redirect('/dosen/nilai');
 	} catch (error) {
 		console.error(error);
 		res.status(500).json({ message: error.message });
