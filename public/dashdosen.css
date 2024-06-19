@@ -56,6 +56,12 @@ body{
     margin-top: -280px;
 }
 
+img{
+    height: 76px;
+    width: 76px;
+    border-radius: 50%;
+}
+
 .titik{
     background-color: #c6e29d;
     max-width: 100%;

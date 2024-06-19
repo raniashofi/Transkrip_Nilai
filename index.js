@@ -10,12 +10,20 @@ const dosenRouter = require("./routes/dosen.js");
 const { fileURLToPath } = require("url");
 const bodyParser = require("body-parser");
 const serveStatic = require("serve-static");
+const fs = require("fs");
+const upload = require("./middleware/uploadFile");
 
 dotenv.config();
 const app = express();
-// const __dirname = path.dirname(new URL(import.meta.url).pathname);
-// const __filename = fileURLToPath(import.meta.url);
 
+app.use(express.static(path.join(__dirname, "public")));
+app.use(cors({ credentials: true, origin: "http://localhost:5000" }));
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use("/uploads", express.static("uploads"));
 app.use(
   serveStatic("public", {
     setHeaders: function (res, path) {
@@ -45,14 +53,6 @@ app.get("/nilai", (req, res) => {
   res.render("nilai");
 });
 
-app.use(express.static(path.join(__dirname, "public")));
-app.use(cors({ credentials: true, origin: "http://localhost:5000" }));
-app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 app.use("/", indexRouter);
 app.use("/mahasiswa", mahasiswaRouter);
 app.use("/admin", adminRouter);
@@ -67,5 +67,6 @@ app.use((req, res, next) => {
   }
   next();
 });
+
 
 app.listen(5000, () => console.log("Server running at port 5000"));

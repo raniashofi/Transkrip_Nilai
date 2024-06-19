@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pengelolaan - Admin</title>
+    <link rel="stylesheet" href="/listPengajuan.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="circle"></div>
+      <div class="keterangan">
+        <a href="/admin/profile">
+          <span><%= user.jurusan %></span>
+        </a>
+      </div>
+      <div class="isi">
+        <a href="dashboard"><h4 >Dashboard</h4></a><br />
+        <a href="pengelolaan"><h4 class="dashboard">Pengelolaan</h4></a><br />
+        <a href=""><h4>History</h4></a><br />
+        <form id="logoutForm" action="/logout" method="POST">
+          <button
+            type="submit"
+            onclick="logout()"
+            style="background: none; border: none; cursor: pointer"
+          >
+            <h4>Logout</h4>
+          </button>
+        </form>
+        <div class="titik"></div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="container2">
+        <div class="list-pengajuan">
+          <h1>List Pengajuan</h1>
+          <table>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>NIM/NIP</th>
+                <th>Jurusan</th>
+                <th>Fakultas</th>
+                <th>Email</th>
+                <th>KRS/KTM</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% listPengajuan.forEach(function(pengajuan, index) { %> <% if
+              (pengajuan.status === 'diproses') { %>
+
+              <tr>
+                <td><%= index + 1 %></td>
+                <td><%= pengajuan.User.nama %></td>
+                <td><%= pengajuan.nim_nip %></td>
+                <td><%= pengajuan.User.jurusan %></td>
+                <td><%= pengajuan.User.fakultas %></td>
+                <td><%= pengajuan.User.email %></td>
+                <td>
+                  <a
+                    href="/uploads/user_<%= pengajuan.nim_nip%>/<%= pengajuan.krs_ktm %>"
+                    >Lihat</a
+                  >
+                </td>
+                <td><%= pengajuan.status %></td>
+                <% if (pengajuan.status === 'diproses') { %>
+                <td>
+                  <form action="/admin/setuju" method="post">
+                    <input
+                      type="hidden"
+                      name="id"
+                      value="<%= pengajuan.idPengajuan %>"
+                    />
+                    <button type="submit">Setuju</button>
+                  </form>
+                  <form action="/admin/tolak" method="post">
+                    <input
+                      type="hidden"
+                      name="id"
+                      value="<%= pengajuan.idPengajuan %>"
+                    /><button type="submit">Tolak</button>
+                  </form>
+                </td>
+                <% } %>
+              </tr>
+              <% } %> <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script>
+      function logout() {
+        fetch("/logout", {
+          method: "DELETE",
+        })
+          .then((response) => {
+            if (response.ok) {
+              window.location.href = "/login"; // Redirect to login page after successful logout
+            } else {
+              throw new Error("Failed to logout");
+            }
+          })
+          .catch((error) => {
+            console.error("Logout failed:", error);
+          });
+      }
+    </script>
+  </body>
+</html>

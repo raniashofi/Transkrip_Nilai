@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Status</title>
+    <link rel="stylesheet" href="/statusMhs.css" />
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.worker.min.js"></script>
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="contcircle">
+        <div class="circle">
+          <img class="profilePNG" src="/Gambar/profile.png" alt="">
+        </div>
+      </div>
+      <div class="keterangan">
+        <a href="/dosen/profile">
+          <div class="nama"><%= user.nama %></div>
+          <div class="nim"><%= user.nim_nip %></div>
+        </a>
+      </div>
+      <div class="isi">
+        <a href="home"><h4>Dashboard</h4></a><br />
+        <a href="pengajuan"><h4 >Pengajuan</h4></a><br />
+        <a href="notifikasi"><h4>Notifikasi</h4></a><br />
+        <a href="status"><h4 class="dashboard">Status</h4></a><br />
+        <a href="history"><h4>History</h4></a><br />
+        <form id="logoutForm" action="/logout" method="POST">
+          <button
+            type="submit"
+            onclick="logout()"
+            style="background: none; border: none; cursor: pointer"
+          >
+            <h4>Logout</h4>
+          </button>
+        </form>
+        <div class="titik"></div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="container2">
+      <h1>Status Pengajuan</h1>
+      
+      <div class="container3">
+        <div class="detail">
+          <div class="konten">
+            <div class="atas">
+              <h3>12/12/2024 - transkrip nilai</h3>
+            </div>
+            <div class="alasan">
+              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia consequuntur laborum, obcaecati, ipsum consectetur quod deleniti distinctio dolorum nemo iure fugiat culpa et, iste illum nam delectus eaque nihil vero!</p>
+            </div>
+            <div class="status-list">
+              <% pengajuan.forEach((item, index) => { %>
+              <div class="status-row">
+                <% if (item.status === 'diterima') { %>
+                <a href="<%= item.pdfPath %>" download>
+                  <div class="download">
+                    <img class="icon" src="/Gambar/download.png" alt="">
+                  </div>
+                </a>
+                <button class="preview" onclick="previewPDF('<%= item.pdfPath %>')">Preview</button>
+                <% } %>
+              </div>
+              <% }); %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+
+      <div id="pdfModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <canvas id="pdfCanvas"></canvas>
+        </div>
+      </div>
+    </div>
+    </div>
+    
+    <script>
+      function logout() {
+        fetch("/logout", {
+          method: "DELETE",
+        })
+          .then((response) => {
+            if (response.ok) {
+              window.location.href = "/login"; // Redirect to login page after successful logout
+            } else {
+              throw new Error("Failed to logout");
+            }
+          })
+          .catch((error) => {
+            console.error("Logout failed:", error);
+          });
+      }
+      function previewPDF(pdfPath) {
+        const url = pdfPath;
+        const modal = document.getElementById("pdfModal");
+        const canvas = document.getElementById("pdfCanvas");
+        const context = canvas.getContext("2d");
+
+        pdfjsLib.getDocument(url).promise.then(function (pdfDoc_) {
+          pdfDoc = pdfDoc_;
+          pdfDoc.getPage(1).then(function (page) {
+            const viewport = page.getViewport({ scale: 1 });
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            const renderContext = {
+              canvasContext: context,
+              viewport: viewport,
+            };
+            page.render(renderContext);
+          });
+        });
+
+        modal.style.display = "block";
+      }
+
+      function closeModal() {
+        const modal = document.getElementById("pdfModal");
+        modal.style.display = "none";
+      }
+    </script>
+    <style></style>
+  </body>
+</html>

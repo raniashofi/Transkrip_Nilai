@@ -1,47 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard Admin</title>
-    <link rel="stylesheet" href="/dashadmin.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/dashadmin.css" />
+  </head>
+  <body>
     <div class="sidebar">
-        <div class="circle"></div>
-        <div class="keterangan">
-            <a href="/admin/profile">
-                <span><%= user.jurusan %></span>
-                </a>
-        </div>
-        <div class="isi">
-            <a href=""><h4 class="dashboard">Dashboard</h4></a><br>
-            <a href=""><h4>Pengelolaan</h4></a><br>
-            <a href=""><h4>History</h4></a><br>
-            <form id="logoutForm" action="/logout" method="POST">
-                <button type="submit" onclick="logout()" style="background:none; border:none; cursor:pointer;"><h4>Logout</h4></button>
-            </form>
-            <div class="titik"></div>
-        </div>
+      <div class="circle"></div>
+      <div class="keterangan">
+        <a href="/admin/profile">
+          <span><%= user.jurusan %></span>
+        </a>
+      </div>
+      <div class="isi">
+        <a href=""><h4 class="dashboard">Dashboard</h4></a><br />
+        <a href="pengelolaan"><h4>Pengelolaan</h4></a><br />
+        <a href=""><h4>History</h4></a><br />
+        <form id="logoutForm" action="/logout" method="POST">
+          <button
+            type="submit"
+            onclick="logout()"
+            style="background: none; border: none; cursor: pointer"
+          >
+            <h4>Logout</h4>
+          </button>
+        </form>
+        <div class="titik"></div>
+      </div>
     </div>
-    <div class="container">
-    </div>
+    <div class="container"></div>
     <script>
-        function logout() {
-            fetch('/logout', {
-                method: 'DELETE'
-            })
-            .then(response => {
-                if (response.ok) {
-                    window.location.href = '/login'; // Redirect to login page after successful logout
-                } else {
-                    throw new Error('Failed to logout');
-                }
-            })
-            .catch(error => {
-                console.error('Logout failed:', error);
-            });
-        }
+      function logout() {
+        fetch("/logout", {
+          method: "DELETE",
+        })
+          .then((response) => {
+            if (response.ok) {
+              window.location.href = "/login"; // Redirect to login page after successful logout
+            } else {
+              throw new Error("Failed to logout");
+            }
+          })
+          .catch((error) => {
+            console.error("Logout failed:", error);
+          });
+      }
     </script>
-</body>
+  </body>
 </html>

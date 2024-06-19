@@ -80,8 +80,8 @@ exports.updateNilai = async (req, res) => {
 			{ nilai_huruf: 'B-', base_nilai: 2.75 },
 			{ nilai_huruf: 'C+', base_nilai: 2.5 },
 			{ nilai_huruf: 'C', base_nilai: 2.0 },
-			{ nilai_huruf: 'D', base_nilai: 1.5 },
-			{ nilai_huruf: 'E', base_nilai: 1.0 },
+			{ nilai_huruf: 'D', base_nilai: 1.0 },
+			{ nilai_huruf: 'E', base_nilai: 0.0 },
 		];
 
 		// validate kode matkul

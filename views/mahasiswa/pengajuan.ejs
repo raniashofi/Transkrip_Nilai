@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-    <link rel="stylesheet" href="/home.css" />
+    <link rel="stylesheet" href="/pengajuan.css" />
   </head>
   <body>
     <div class="sidebar">
@@ -20,8 +20,8 @@
         </a>
       </div>
       <div class="isi">
-        <a href="home"><h4 class="dashboard">Dashboard</h4></a><br />
-        <a href="pengajuan"><h4>Pengajuan</h4></a><br />
+        <a href="home"><h4>Dashboard</h4></a><br />
+        <a href="pengajuan"><h4 class="dashboard">Pengajuan</h4></a><br />
         <a href="notifikasi"><h4>Notifikasi</h4></a><br />
         <a href="status"><h4>Status</h4></a><br />
         <a href="history"><h4>History</h4></a><br />
@@ -39,10 +39,26 @@
     </div>
     <div class="container">
       <div class="container2">
-        <h1>Selamat Datang!</h1>
-        <h3>Silahkan ajukan transkrip</h3>
-        <a href="pengajuan"><button class="mulai">mulai</button></a>
+      <h1>Form Pengajuan</h1>
+      <div class="isi2">
+      <form
+        action="/mahasiswa/pengajuan"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+      <div class="label">
+        <label for="ktm">Bukti KTM/KRS</label><br />
       </div>
+        <input class="file" type="file" id="gambar" name="gambar" /> <br /><br /><br />
+        <label class="alasan" for="alasan">Alasan</label><br />
+      <div class="submit">
+        <textarea id="alasan" name="alasan" required></textarea>
+        <br />
+        <button class="buttonSub" type="submit">Submit</button>
+      </div>
+      </form>
+    </div>
+    </div>
     </div>
 
     <script>
