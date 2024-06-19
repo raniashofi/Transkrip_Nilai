@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+
+    background-color: white;
+    display: flex;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.284), rgba(255, 255, 255, 0.223));
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    border-radius: 20px 20px 20px 20px;
+    margin: auto;
+    background-image: url(./Gambar/Unand.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    align-items: center;
+    display: flex;
+    font-family: 'Montserrat';
+}
+
+.sidebar{
+    margin-left: 15px;
+    max-width: 250px;
+    width: 100%;
+    height: 93%;
+    background-color: #233323;
+    border-radius: 20px;
+    z-index: 3;
+}
+
+.circle {
+    height: 90px;
+    width: 90px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    margin-top: 40px;
+    margin-left: 78px;
+  }
+
+.titik{
+    background-color: #c6e29d;
+    max-width: 100%;
+    width: 13px;
+    max-height: 100%;
+    height: 32px;
+    border-radius: 0px 6px 6px 0px;
+    margin-left: 0px;
+    margin-top: -76.5%;
+    position: absolute;
+    z-index: 2;
+
+}
+
+h4{
+    margin-top: 7px;
+    text-align: start;
+    margin-left: 55px;
+    margin-bottom: 5px;
+    color: #536653;
+    font-size: 20px;
+}
+
+h4:hover{
+    color: #c6e29d;
+}
+
+.dashboard{
+    color: #c6e29d;
+}
+
+a{
+    text-decoration: none;
+}
+
+.isi{
+    margin-top: 230px;
+    position: absolute;
+}
+
+.container{
+    width: 100%;
+    max-width: 2500px;
+    height: 100%;
+    background-color: #ffffff6c;
+    z-index: 1;
+    margin-left: -265px;
+}
+
+.keterangan{
+    position: absolute;
+    margin-top: 150px;
+    color: #ffffff;
+    margin-left: 49px;
+}
+
+.jurusan{
+    margin-left: 36px;
+    margin-top: 7px;
+}
+
+span{
+    color: #c6e29d;
+    margin-left: 11px;
+    margin-top: 5px;
+}
+
+.container2{
+    background-color: #23332300;
+    border-width: 3px;
+    border-color: #233323;
+    border-radius: 20px;
+    border-style: solid;
+    width: 100%;
+    height: 93%;
+    max-width: 1220px;   
+    margin-top: 25px;
+    margin-left: 290px;
+    z-index: 3;
+    text-align: center; 
+}
+
+h3{
+    font-size: 25px;
+    margin-top: 40px;
+    margin-right: 810px;
+}
+
+.pengajuan{
+    background-color: #536653;
+    width: 100%;
+    max-width: 290px;
+    height: 100%;
+    max-height: 130px;
+    padding: 15px;
+    padding-top: 25px;
+    border-radius: 20px;
+    margin: 2rem;
+}
+
+.pengajuan .more{
+    text-decoration: none;
+    text-align: center;
+    color: #c6e29d;
+}
+
+.pengajuan h1{
+    color: #c6e29d;
+    margin-bottom: 40px;
+    font-size: 25px;
+}
+
+.disetujui{
+    background-color: #536653;
+    width: 100%;
+    max-width: 290px;
+    height: 100%;
+    max-height: 130px;
+    padding: 15px;
+    padding-top: 25px;
+    border-radius: 20px;
+    margin: 2rem;
+}
+
+.disetujui .more{
+    text-decoration: none;
+    text-align: center;
+    color: #c6e29d;
+}
+
+.disetujui h1{
+    color: #c6e29d;
+    margin-bottom: 40px;
+    font-size: 25px;
+}
+
+.ditolak{
+    background-color: #536653;
+    width: 100%;
+    max-width: 290px;
+    height: 100%;
+    max-height: 130px;
+    padding: 15px;
+    padding-top: 25px;
+    border-radius: 20px;
+    margin: 2rem;
+}
+
+.ditolak .more{
+    text-decoration: none;
+    text-align: center;
+    color: #c6e29d;
+}
+
+.ditolak h1{
+    color: #c6e29d;
+    margin-bottom: 40px;
+    font-size: 25px;
+}
+
+.history{
+    background-color: #536653;
+    width: 100%;
+    max-width: 290px;
+    height: 100%;
+    max-height: 130px;
+    padding: 15px;
+    padding-top: 25px;
+    border-radius: 20px;
+    margin: 2rem;
+}
+
+.history .more{
+    text-decoration: none;
+    text-align: center;
+    color: #c6e29d;
+}
+
+.history h1{
+    color: #c6e29d;
+    margin-bottom: 40px;
+    font-size: 25px;
+}
+
+.atas{
+    display: flex;
+    margin-left: 260px;
+    margin-top: 80px;
+}
+
+.bawah{
+    display: flex;
+    margin-left: 260px;
+}
+
+hr{
+    margin-bottom: 5px;
+}
+

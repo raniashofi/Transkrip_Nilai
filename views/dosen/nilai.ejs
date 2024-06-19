@@ -9,7 +9,9 @@
 <body>
     <div class="sidebar">
         <div class="contcircle">
-            <div class="circle"></div>
+            <div class="circle">
+                <img src="/Gambar/profile.png" alt="">
+            </div>
         </div>
         <div class="keterangan">
             <a href="/dosen/profile">
@@ -29,10 +31,6 @@
     <div class="container">
         <div class="container2">
             <h2>Input Nilai Mahasiswa</h2>
-            <!-- Form untuk Memilih Mata Kuliah dan Tahun Ajaran -->
-            <div class="search-container">
-                <input type="text" placeholder="Cari..." id="search">
-            </div>
 
             <div class="judul1">
                 <h3>Tahun Ajaran</h3>
@@ -54,6 +52,7 @@
         <div class="judul2">
             <h3>Mata Kuliah</h3>
         </div>
+        
         <div class="mataKuliah">
         <select name="mataKuliah">
             <% listMataKuliah.forEach(function(mataKuliah) { %>
@@ -82,8 +81,8 @@
         <table>
             <thead>
                 <tr>
-                    <th>NIM</th>
-                    <th>Nama Mahasiswa</th>
+                    <th class="thNim">NIM</th>
+                    <th class="thNama">Nama Mahasiswa</th>
                     <th>Nilai Huruf</th>
                     <th>Nilai Mutu</th>
                 </tr>
@@ -95,7 +94,7 @@
                     <td><%= transkrip.User.nama %></td>
                     <td>
                         <label for="<%= transkrip.nim_nip %>">
-                            <select name="<%= transkrip.nim_nip %>">
+                            <select class="nilaiHuruf" name="<%= transkrip.nim_nip %>">
                                 <% ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'D', 'E'].forEach(function(nilai_huruf) { %>
                                 <option value="<%= nilai_huruf %>" <%= transkrip.nilai_huruf === nilai_huruf ? 'selected' : '' %>>
                                     <%= nilai_huruf %>

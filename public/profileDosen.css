@@ -43,6 +43,12 @@
             border-radius: 50%;
         }
 
+        img{
+            height: 76px;
+            width: 76px;
+            border-radius: 50%;
+        }
+
         .contcircle{
             position: absolute;
             width: 100%;
@@ -130,23 +136,24 @@
         .profile-card {
             padding: 20px;
             z-index: 2;
-            margin-left: 600px;
-            margin-top: 200px;
-            background-color: #c6e29d;
+            background-color: #c6e29d00;
             max-width: 100%;
             width: 520px;
             border-radius: 20px;
+            margin: 3rem;
         }
         .profile-header {
             font-size: 24px;
             font-weight: bold;
             margin-bottom: 10px;
             z-index: 2;
+            text-align: start;
             margin-bottom: 30px;
         }
         .profile-field {
             margin-bottom: 20px;
             z-index: 2;
+            text-align: start;
         }
         .profile-field label {
             font-weight: bold;
@@ -161,7 +168,7 @@
         }
 
         .ubah{
-            margin-left: 300px;
+            margin-left: 0px;
             margin-top: 40px;
             display: block;
             background-color: #536653;
@@ -179,4 +186,19 @@
         .ubah:hover{
             color: #c6e29d;
             background-color: #233323;
+        }
+
+        .container2{
+            background-color: #23332300;
+            border-width: 3px;
+            border-color: #233323;
+            border-radius: 20px;
+            border-style: solid;
+            width: 100%;
+            height: 93%;
+            max-width: 1240px;   
+            margin-top: 25px;
+            margin-left: 260px;
+            z-index: 3;
+            text-align: center; 
         }

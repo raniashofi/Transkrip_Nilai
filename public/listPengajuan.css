@@ -28,7 +28,7 @@ body{
 
 .sidebar{
     margin-left: 15px;
-    max-width: 220px;
+    max-width: 250px;
     width: 100%;
     height: 93%;
     background-color: #233323;
@@ -37,29 +37,14 @@ body{
 }
 
 .circle {
-    height: 75px;
-    width: 75px;
+    height: 90px;
+    width: 90px;
     background-color: #ffffff;
     border-radius: 50%;
-}
-
-.contcircle{
     position: absolute;
-    width: 100%;
-    max-width: 220px;
-    display: flex;
-    justify-content: center; 
-    align-items: center;     
-    text-align: center;     
-    height: 100%;   
-    margin-top: -280px;
-}
-
-img{
-    height: 76px;
-    width: 76px;
-    border-radius: 50%;
-}
+    margin-top: 40px;
+    margin-left: 78px;
+  }
 
 .titik{
     background-color: #c6e29d;
@@ -68,10 +53,16 @@ img{
     max-height: 100%;
     height: 32px;
     border-radius: 0px 6px 6px 0px;
-    margin-top: -145px;
+    margin-left: 0px;
+    margin-top: -76.5%;
     position: absolute;
     z-index: 2;
 
+}
+
+h1{
+    font-size: 25px;
+    margin-top: 20px;
 }
 
 h4{
@@ -93,11 +84,10 @@ h4:hover{
 
 a{
     text-decoration: none;
-    color: #c6e29d;
 }
 
 .isi{
-    margin-top: 240px;
+    margin-top: 230px;
     position: absolute;
 }
 
@@ -107,87 +97,26 @@ a{
     height: 100%;
     background-color: #ffffff6c;
     z-index: 1;
-    margin-left: -235px;
+    margin-left: -265px;
 }
 
 .keterangan{
     position: absolute;
-    width: 100%;
-    max-width: 220px;
-    display: flex;
-    justify-content: center; 
-    align-items: center;     
-    text-align: center;     
-    height: 100%;   
-    margin-top: -200px;
+    margin-top: 150px;
+    color: #ffffff;
+    margin-left: 49px;
 }
 
-.profile-card {
-    padding: 20px;
-    background-color: #c6e29d00;
-    max-width: 100%;
-    width: 520px;
-    border-radius: 20px;
-    margin: 3rem;
-}
-.profile-header {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    z-index: 2;
-    margin-bottom: 30px;
-    text-align: start;
-}
-.profile-field {
-    margin-bottom: 20px;
-    z-index: 2;
-    text-align: start;
-}
-.profile-field label {
-    font-weight: bold;
+.jurusan{
+    margin-left: 36px;
+    margin-top: 7px;
 }
 
-.ubah{
-    margin-top: 40px;
-    display: block;
-    background-color: #536653;
-    width: 35%;
-    padding: 10px;
-    padding-bottom: 13px;
-    padding-top: 13px;
-    border-radius: 30px;
-    border: 0px;
-    font-weight: bold;
+span{
     color: #c6e29d;
-    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.17);
-}
-
-.ubah:hover{
-    color: #c6e29d;
-    background-color: #233323;
-}
-
-input{
-    width: 100%;
-    max-width: 270px;
-    padding: 9px;
-    padding-left: 10px;
-    border-radius: 30px;
-    border-color: #233323;
-    border-style: double ;
+    margin-left: 11px;
     margin-top: 5px;
-    border: 0px;
-    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.34);
 }
-
-input::placeholder{
-    font-family: Montserrat;
-    font-weight: 500;
-}
-.nama, .nim {
-    margin: auto;
-}
-
 
 .container2{
     background-color: #23332300;
@@ -197,10 +126,29 @@ input::placeholder{
     border-style: solid;
     width: 100%;
     height: 93%;
-    max-width: 1240px;   
+    max-width: 1220px;   
     margin-top: 25px;
-    margin-left: 260px;
+    margin-left: 290px;
     z-index: 3;
     text-align: center; 
 }
-
+table{
+    border-collapse: collapse;
+    margin: auto;
+    margin-top: 50px;
+}
+  table td, table th {
+    padding: 8px;
+  }
+  
+  table tr:nth-child(even){background-color: #f4faeb;}
+  
+  table tr:hover {background-color: #c6e29d;}
+  
+  table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #deedc8;
+    color: #233323;
+  }
