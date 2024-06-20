@@ -36,9 +36,25 @@ router.get(
   getProfile
 );
 
-router.get("/pengelolaan", verifyToken("admin"), async (req, res) => {
-  const user = await getUser(req, res);
-  res.render("admin/pengelolaan", { user });
+router.get('/pengelolaan', verifyToken('admin'), async (req, res) => {
+  try {
+    const user = await getUser(req, res);
+
+    // Hitung jumlah pengajuan berdasarkan status
+    const countDiproses = await Pengajuan.count({ where: { status: 'diproses' } });
+    const countDiterima = await Pengajuan.count({ where: { status: 'diterima' } });
+    const countDitolak = await Pengajuan.count({ where: { status: 'ditolak' } });
+
+    res.render('admin/pengelolaan', {
+      user,
+      countDiproses,
+      countDiterima,
+      countDitolak
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
 });
 
 router.get("/listPengajuan", verifyToken("admin"), getListPengajuan);

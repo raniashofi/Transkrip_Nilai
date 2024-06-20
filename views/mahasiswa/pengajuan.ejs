@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <title>Pengajuan</title>
     <link rel="stylesheet" href="/pengajuan.css" />
   </head>
   <body>
@@ -47,9 +47,12 @@
         enctype="multipart/form-data"
       >
       <div class="label">
-        <label for="ktm">Bukti KTM/KRS</label><br />
+        <label for="ktm">Bukti KTM/KRS</label><br/>
       </div>
-        <input class="file" type="file" id="gambar" name="gambar" /> <br /><br /><br />
+      <div class="divfile">
+        <input class="file" type="file" id="gambar" name="gambar"/> 
+      </div>
+        <br/><br/><br/>
         <label class="alasan" for="alasan">Alasan</label><br />
       <div class="submit">
         <textarea id="alasan" name="alasan" required></textarea>

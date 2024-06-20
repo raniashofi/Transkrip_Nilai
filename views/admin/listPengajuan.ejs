@@ -8,33 +8,39 @@
   </head>
   <body>
     <div class="sidebar">
-      <div class="circle"></div>
+      <div class="contcircle">
+        <div class="circle">
+          <img src="/Gambar/profile.png" alt="">
+        </div>
+      </div>
       <div class="keterangan">
         <a href="/admin/profile">
-          <span><%= user.jurusan %></span>
+          <div class="nama"><%= user.jurusan %></div>
         </a>
       </div>
       <div class="isi">
-        <a href="dashboard"><h4 >Dashboard</h4></a><br />
-        <a href="pengelolaan"><h4 class="dashboard">Pengelolaan</h4></a><br />
-        <a href=""><h4>History</h4></a><br />
-        <form id="logoutForm" action="/logout" method="POST">
-          <button
-            type="submit"
-            onclick="logout()"
-            style="background: none; border: none; cursor: pointer"
-          >
-            <h4>Logout</h4>
-          </button>
-        </form>
+        <div class="isi2">
+          <a href="dashboard"><h4>Dashboard</h4></a><br />
+          <a href="pengelolaan"><h4 class="dashboard">Pengelolaan</h4></a><br />
+          <a href="historyAdmin"><h4>History</h4></a><br />
+          <form id="logoutForm" action="/logout" method="POST">
+            <button
+              type="submit"
+              onclick="logout()"
+              style="background: none; border: none; cursor: pointer"
+            >
+              <h4>Logout</h4>
+            </button>
+          </form>
+        </div>
         <div class="titik"></div>
       </div>
     </div>
 
     <div class="container">
       <div class="container2">
+        <h1>List Pengajuan</h1>
         <div class="list-pengajuan">
-          <h1>List Pengajuan</h1>
           <table>
             <thead>
               <tr>
@@ -42,7 +48,6 @@
                 <th>Nama</th>
                 <th>NIM/NIP</th>
                 <th>Jurusan</th>
-                <th>Fakultas</th>
                 <th>Email</th>
                 <th>KRS/KTM</th>
                 <th>Status</th>
@@ -57,7 +62,6 @@
                 <td><%= pengajuan.User.nama %></td>
                 <td><%= pengajuan.nim_nip %></td>
                 <td><%= pengajuan.User.jurusan %></td>
-                <td><%= pengajuan.User.fakultas %></td>
                 <td><%= pengajuan.User.email %></td>
                 <td>
                   <a
@@ -65,7 +69,6 @@
                     >Lihat</a
                   >
                 </td>
-                <td><%= pengajuan.status %></td>
                 <% if (pengajuan.status === 'diproses') { %>
                 <td>
                   <form action="/admin/setuju" method="post">

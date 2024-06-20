@@ -45,44 +45,55 @@
       <h1>Status Pengajuan</h1>
       
       <div class="container3">
-        <div class="detail">
-          <div class="konten">
-            <div class="atas">
-              <h3>12/12/2024 - transkrip nilai</h3>
-            </div>
-            <div class="alasan">
-              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia consequuntur laborum, obcaecati, ipsum consectetur quod deleniti distinctio dolorum nemo iure fugiat culpa et, iste illum nam delectus eaque nihil vero!</p>
-            </div>
-            <div class="status-list">
-              <% pengajuan.forEach((item, index) => { %>
-              <div class="status-row">
-                <% if (item.status === 'diterima') { %>
-                <a href="<%= item.pdfPath %>" download>
-                  <div class="download">
-                    <img class="icon" src="/Gambar/download.png" alt="">
-                  </div>
-                </a>
-                <button class="preview" onclick="previewPDF('<%= item.pdfPath %>')">Preview</button>
-                <% } %>
+        <% pengajuan.forEach((item, index) => { %>
+          <div class="detail" id="detail-<%= index %>">
+            <div class="konten">
+              <div class="atas">
+                <h3>Pengajuan pada <%= new Date(item.createdAt).toLocaleDateString('en-GB') %></h3>
+                <div class="divstatus <% if (item.status === 'diterima') { %>diterima <% } else if (item.status === 'ditolak') { %>ditolak <% } else if (item.status === 'diproses') { %>diproses <% } %>">
+                  <h3 class="statuspengajuan"><%= item.status.charAt(0).toUpperCase() + item.status.slice(1) %></h3>
+                </div>
+                <div class="panah" onclick="toggleDetail('<%= index %>')">▼</div>
               </div>
-              <% }); %>
+              <div class="alasan">
+                <p><%= item.alasan %></p>
+              </div>
+              <div class="status-list">
+                <div class="status-row">
+                  <% if (item.status === 'diterima') { %>
+                    <a href="<%= item.pdfPath %>" download>
+                      <div class="download">
+                        <img class="icon" src="/Gambar/download.png" alt="Download Icon">
+                      </div>
+                    </a>
+                    <div class="divbutton">
+                      <button class="preview" onclick="openPDFPreview('<%= item.pdfPath %>')">Preview</button>
+                    </div>
+                  <% } %>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        <% }); %>
       </div>
-
       
-
-      <div id="pdfModal" class="modal">
-        <div class="modal-content">
-          <span class="close" onclick="closeModal()">&times;</span>
-          <canvas id="pdfCanvas"></canvas>
-        </div>
-      </div>
-    </div>
     </div>
     
     <script>
+
+      function toggleDetail(index) {
+          const detailElement = document.getElementById(`detail-${index}`);
+          detailElement.classList.toggle('expanded');
+        }
+
+      function openPDFPreview(pdfPath) {
+        window.open(`/preview?pdf=${encodeURIComponent(pdfPath)}`, '_blank');
+      }
+
+      function closeModal() {
+        document.getElementById("pdfModal").style.display = "none";
+      }
+
       function logout() {
         fetch("/logout", {
           method: "DELETE",
@@ -98,34 +109,7 @@
             console.error("Logout failed:", error);
           });
       }
-      function previewPDF(pdfPath) {
-        const url = pdfPath;
-        const modal = document.getElementById("pdfModal");
-        const canvas = document.getElementById("pdfCanvas");
-        const context = canvas.getContext("2d");
-
-        pdfjsLib.getDocument(url).promise.then(function (pdfDoc_) {
-          pdfDoc = pdfDoc_;
-          pdfDoc.getPage(1).then(function (page) {
-            const viewport = page.getViewport({ scale: 1 });
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
-
-            const renderContext = {
-              canvasContext: context,
-              viewport: viewport,
-            };
-            page.render(renderContext);
-          });
-        });
-
-        modal.style.display = "block";
-      }
-
-      function closeModal() {
-        const modal = document.getElementById("pdfModal");
-        modal.style.display = "none";
-      }
+      
     </script>
     <style></style>
   </body>

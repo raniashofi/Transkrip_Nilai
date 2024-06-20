@@ -7,6 +7,7 @@ const indexRouter = require("./routes/index.js");
 const mahasiswaRouter = require("./routes/mahasiswa.js");
 const adminRouter = require("./routes/admin.js");
 const dosenRouter = require("./routes/dosen.js");
+const previewRouter = require('./routes/preview.js');
 const { fileURLToPath } = require("url");
 const bodyParser = require("body-parser");
 const serveStatic = require("serve-static");
@@ -57,6 +58,7 @@ app.use("/", indexRouter);
 app.use("/mahasiswa", mahasiswaRouter);
 app.use("/admin", adminRouter);
 app.use("/dosen", dosenRouter);
+app.use('/preview', previewRouter);
 
 app.use((req, res, next) => {
   const refreshToken = req.cookies.refreshToken;

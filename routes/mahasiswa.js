@@ -104,6 +104,7 @@ router.get("/status", verifyToken("mahasiswa"), async (req, res) => {
     const pengajuanlist = await Pengajuan.findAll({
       where: { nim_nip: user.nim_nip },
       include: [User],
+      order: [['createdAt', 'DESC']],
     });
     const pengajuanWithPdf = pengajuanlist.map((pengajuan) => {
       if (pengajuan.status === "diterima") {
