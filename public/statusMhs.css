@@ -154,73 +154,135 @@ form {
   text-align: center;
 }
 
-.container2 .status-list {
-  margin-top: 10px;
+.container3{
+  margin-top: 110px;
+  margin-left: 40px;
 }
 
 h1 {
-  margin: auto;
+  font-size: 25px;
   margin-top: 40px;
+  margin-left: 40px;
+  position: absolute;
 }
 
-.detail{
+.detail {
   background-color: #ffffff;
   width: 1000px;
   height: 60px;
-  border-radius: 10px;
-  transition: 0.5s;
+  border-radius: 20px;
+  transition: height 0.5s;
   padding: 18px;
-  margin: auto;
-  margin-top: 40px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-top: 20px;
+  overflow: hidden; /* Hide overflowing content */
 }
 
-.detail:hover{
-  height: 170px;
+.detail.expanded {
+  height: 190px; /* Height when expanded */
 }
 
-h3{
+h3 {
   color: #000000;
   text-align: start;
 }
 
-p{
+p {
   color: #000000;
   text-align: justify;
+  font-weight: 500;
 }
 
-.container .detail .konten .atas{
-  margin-bottom: 10px;
+.container .detail .konten .atas {
+  display: flex;
+  justify-content: space-between; /* Added to align the h3 and panah */
+  margin-bottom: 30px;
 }
 
-.container .detail .konten{
+.container .detail .konten {
   width: 100%;
-  height: 35px;
-  overflow: hidden;
-  transition: 0.5s;
+  transition: height 0.3s;
 }
 
-.container .detail:hover .konten{
-  height: 250px;
-}
-
-.download{
-  width: 40px;
-  height: 35px;
+.container .detail .konten .download {
+  width: 36px;
+  height: 31px;
   border-color: #000000;
   border-style: solid;
   border-width: 2px;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 2px;
-  margin-right: -300px;
+  margin-left: 900px;
+  margin-top: 40px;
+  overflow: hidden;
 }
 
-.icon{
+.container .detail .konten .icon {
+  width: 20px;
+  height: 20px;
   margin: 2px;
 }
 
-.preview{
-  padding: 4px;
+.preview {
+  margin-right: -760px;
+  padding: 6px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: #c6e29d;
+  border-radius: 10px;
+  border-width: 2px;
+  font-family: Montserrat;
+  font-weight: 600px;
+  cursor: pointer;
 }
 
+.preview:hover{
+  background-color: #536653;
+  color: #ffffff;
+}
 
+.divbutton {
+  margin-top: -31px;
+  margin-right: 11px;
+}
+
+.panah {
+  cursor: pointer;
+  font-size: 18px; /* Add font size for visibility */
+  user-select: none; /* Prevent text selection */
+}
+
+.statuspengajuan {
+  font-weight: 500;
+  font-size: 13px;
+  margin: auto;
+  text-align: center;
+}
+
+.divstatus {
+  width: 100px;
+  height: 30px;
+  padding: 5px;
+  margin-left: 480px;
+  margin-top: -3px;
+  border-radius: 20px;
+}
+
+.divstatus.diproses{
+  border-width: 2px;
+  border-style: solid;
+}
+
+.divstatus.diterima {
+  padding-top: 7px;
+  background-color: #c6e29d;
+  color: #233323;
+}
+
+.divstatus.ditolak {
+  padding-top: 7px;
+  background-color: #536653;
+  color: #c6e29d;
+}
 

@@ -24,11 +24,12 @@ body{
     align-items: center;
     display: flex;
     font-family: 'Montserrat';
+    width: 100%;
 }
 
 .sidebar{
     margin-left: 15px;
-    max-width: 250px;
+    max-width: 220px;
     width: 100%;
     height: 93%;
     background-color: #233323;
@@ -37,14 +38,29 @@ body{
 }
 
 .circle {
-    height: 90px;
-    width: 90px;
+    height: 75px;
+    width: 75px;
     background-color: #ffffff;
     border-radius: 50%;
+}
+
+.contcircle{
     position: absolute;
-    margin-top: 40px;
-    margin-left: 78px;
-  }
+    width: 100%;
+    max-width: 220px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    text-align: center;     
+    height: 100%;   
+    margin-top: -280px;
+}
+
+img{
+    height: 76px;
+    width: 76px;
+    border-radius: 50%;
+}
 
 .titik{
     background-color: #c6e29d;
@@ -53,8 +69,7 @@ body{
     max-height: 100%;
     height: 32px;
     border-radius: 0px 6px 6px 0px;
-    margin-left: 0px;
-    margin-top: -106.5%;
+    margin-top: -198px;
     position: absolute;
     z-index: 2;
 
@@ -79,11 +94,21 @@ h4:hover{
 
 a{
     text-decoration: none;
+    color: #c6e29d;
 }
 
 .isi{
-    margin-top: 230px;
+    margin-top: 240px;
     position: absolute;
+    justify-content: center; 
+    align-items: center;     
+    text-align: center;  
+    width: 100%;
+    max-width: 220px;
+}
+
+.isi2{
+    margin-left: -8px;
 }
 
 .container{
@@ -92,23 +117,69 @@ a{
     height: 100%;
     background-color: #ffffff6c;
     z-index: 1;
-    margin-left: -265px;
+    margin-left: -235px;
 }
 
-.keterangan{
+.keterangan {
     position: absolute;
-    margin-top: 150px;
+    width: 100%;
+    max-width: 220px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    text-align: center;     
+    height: 100%;   
+    margin-top: -200px;
+}
+
+form{
+    margin-left: -95px;
+}
+
+
+.nama {
+    margin: auto;
+}
+
+.container2{
+    background-color: #23332300;
+    border-width: 3px;
+    border-color: #233323;
+    border-radius: 20px;
+    border-style: solid;
+    width: 100%;
+    height: 93%;
+    max-width: 1240px;   
+    margin-top: 25px;
+    margin-left: 260px;
+    z-index: 3;
+    text-align: center; 
+}
+
+h1{
+    margin-bottom: 3px;
+    margin-top: 280px;
+}
+
+.mulai{
+    display: block;
+    background-color: #536653;
+    width: 9%;
+    padding: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-radius: 30px;
+    border: 0px;
+    font-weight: bold;
     color: #ffffff;
-    margin-left: 49px;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.17);
+    margin: auto;
+    margin-top: 15px;
+    font-weight: 400;
+    letter-spacing: 1px;
 }
 
-.jurusan{
-    margin-left: 36px;
-    margin-top: 7px;
-}
-
-span{
+.mulai:hover{
     color: #c6e29d;
-    margin-left: 11px;
-    margin-top: 5px;
+    background-color: #233323;
 }

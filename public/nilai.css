@@ -152,11 +152,16 @@ form{
     text-align: center; 
 }
 
+.container3{
+  margin-top: 110px;
+}
 
-h2{
-    display: flex;
-    margin-top: 50px;
-    margin-left: 50px;
+
+h1 {
+  font-size: 25px;
+  margin-top: 40px;
+  margin-left: 40px;
+  position: absolute;
 }
 
 h3{
@@ -166,7 +171,7 @@ h3{
 }
 
 .judul1{
-  margin-left: 20px;
+  margin-left: 15px;
   margin-top: 40px;
   width: 100%;
   max-width: 170px;
@@ -181,19 +186,26 @@ h3{
 }
 
 select{
+  appearance: none; /* Menghilangkan panah bawaan */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('Gambar/arrow.png'); /* Ganti dengan path gambar panah Anda */
+  background-size: 10px 10px;
+  background-repeat: no-repeat;
+  background-position: calc(100% - 13px) center; /* Menggeser panah ke kiri 4px */
+  cursor: pointer;
   padding: 5px;
   border-radius: 15px;
-  padding-right: 10px;
+  padding-right: 40px;
   padding-left: 20px;
 }
 
 .nilaiHuruf{
   border-radius: 5px;
-  border-style: none;
 }
 
 .tahunAjaran{
-  margin-left: 30px;
+  margin-left: 20px;
   margin-right: 950px;
   margin-top: 8px;
 }
@@ -206,11 +218,17 @@ select{
 
 .update{
   padding: 8px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
   border-radius: 25px;
   border: none;
   position: absolute;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.update:hover{
+  background-color: #c6e29d;
 }
 
 .buttonUpdate{
@@ -226,12 +244,15 @@ select{
     margin: auto;
     margin-top: 50px;
     border-radius: 15px;
+    overflow: hidden;
   }
 
 
   .table{
     margin-left: 90px;
     margin-top: -40px;
+    
+    border-radius: 20px;
   }
 
   
@@ -260,4 +281,6 @@ select{
     background-color: #deedc8;
     color: #233323;
   }
+
+  
 

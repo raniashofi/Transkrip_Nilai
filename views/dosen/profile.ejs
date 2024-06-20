@@ -30,31 +30,32 @@
     </div>
     <div class="container">
         <div class="container2">
-        <div class="profile-card bg-white">
-            <div class="profile-header">Profile</div>
-            <div class="profile-field">
-                <label>Name:</label>
-                <span><%= user.nama %></span>
+            <div class="profile-card bg-white">
+                <div class="profile-header">Profile</div>
+                <div class="profile-field">
+                    <label>Name:</label>
+                    <span><%= user.nama %></span>
+                </div>
+                <div class="profile-field">
+                    <label>Email:</label>
+                    <span><%= user.email %></span>
+                </div>
+                <div class="profile-field">
+                    <label>NIP:</label>
+                    <span><%= user.nim_nip %></span>
+                </div>
+                <div class="profile-field">
+                    <label>Fakultas:</label>
+                    <span><%= user.fakultas %></span>
+                </div>
+                <div class="profile-field">
+                    <label>Jurusan:</label>
+                    <span><%= user.jurusan %></span>
+                </div>
+                <a href="/dosen/profile/changePass">
+                    <button class="ubah"> Ubah Password</button>
+                </a>
             </div>
-            <div class="profile-field">
-                <label>Email:</label>
-                <span><%= user.email %></span>
-            </div>
-            <div class="profile-field">
-                <label>NIP:</label>
-                <span><%= user.nim_nip %></span>
-            </div>
-            <div class="profile-field">
-                <label>Fakultas:</label>
-                <span><%= user.fakultas %></span>
-            </div>
-            <div class="profile-field">
-                <label>Jurusan:</label>
-                <span><%= user.jurusan %></span>
-            </div>
-            <a href="/dosen/profile/changePass">
-                <button class="ubah"> Ubah Password</button>
-            </a>
         </div>
     </div>
 

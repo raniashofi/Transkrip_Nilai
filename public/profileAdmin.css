@@ -24,26 +24,43 @@
             align-items: center;
             display: flex;
             font-family: 'Montserrat';
+            width: 100%;
         }
-
+        
+        
         .sidebar{
             margin-left: 15px;
-            max-width: 250px;
+            max-width: 220px;
             width: 100%;
             height: 93%;
             background-color: #233323;
             border-radius: 20px;
             z-index: 3;
         }
-
+        
         .circle {
-            height: 90px;
-            width: 90px;
+            height: 75px;
+            width: 75px;
             background-color: #ffffff;
             border-radius: 50%;
+        }
+        
+        .contcircle{
             position: absolute;
-            margin-top: 40px;
-            margin-left: 78px;
+            width: 100%;
+            max-width: 220px;
+            display: flex;
+            justify-content: center; 
+            align-items: center;     
+            text-align: center;     
+            height: 100%;   
+            margin-top: -280px;
+        }
+        
+        img{
+            height: 76px;
+            width: 76px;
+            border-radius: 50%;
         }
 
         .titik{
@@ -53,11 +70,9 @@
             max-height: 100%;
             height: 32px;
             border-radius: 0px 6px 6px 0px;
-            margin-left: 0px;
-            margin-top: -106.5%;
+            margin-top: -198px;
             position: absolute;
             z-index: 2;
-
         }
 
         h4{
@@ -86,73 +101,87 @@
             position: absolute;
         }
 
+        .isi2{
+            margin-left: -8px;
+        }
+        
         .container{
             width: 100%;
             max-width: 2500px;
             height: 100%;
             background-color: #ffffff6c;
             z-index: 1;
-            margin-left: -265px;
+            margin-left: -235px;
         }
 
         .keterangan{
             position: absolute;
-            margin-top: 150px;
-            color: #ffffff;
-            margin-left: 45px;
+            width: 100%;
+            max-width: 220px;
+            display: flex;
+            justify-content: center; 
+            align-items: center;     
+            text-align: center;     
+            height: 100%;   
+            margin-top: -200px;
         }
 
-        .link{
-            color: #c6e29d;
-            margin-left: 15px;
-            margin-top: 5px;
+        form{
+            margin-left: -95px;
+        }
+        
+        
+        .nama {
+            margin: auto;
         }
 
         .profile-card {
             padding: 20px;
             z-index: 2;
-            margin-left: 600px;
-            margin-top: 200px;
-            background-color: #c6e29d;
+            background-color: #c6e29d00;
             max-width: 100%;
             width: 520px;
             border-radius: 20px;
+            margin: 3rem;
         }
         .profile-header {
             font-size: 24px;
             font-weight: bold;
             margin-bottom: 10px;
             z-index: 2;
+            text-align: start;
             margin-bottom: 30px;
         }
         .profile-field {
             margin-bottom: 20px;
             z-index: 2;
+            text-align: start;
         }
         .profile-field label {
             font-weight: bold;
         }
 
-        .ubah{
-            margin-left: 300px;
-            margin-top: 40px;
-            display: block;
-            background-color: #536653;
-            width: 35%;
-            padding: 10px;
-            padding-bottom: 13px;
-            padding-top: 13px;
-            border-radius: 30px;
-            border: 0px;
-            font-weight: bold;
-            color: #c6e29d;
-            box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.17);
+        .nama, .nim {
+            margin: auto;
         }
 
-        .ubah:hover{
-            color: #c6e29d;
-            background-color: #233323;
+        form{
+            margin-left: -95px;
         }
 
+        .container2{
+            background-color: #23332300;
+            border-width: 3px;
+            border-color: #233323;
+            border-radius: 20px;
+            border-style: solid;
+            width: 100%;
+            height: 93%;
+            max-width: 1240px;   
+            margin-top: 25px;
+            margin-left: 260px;
+            z-index: 3;
+            text-align: center; 
+        }
         
         
