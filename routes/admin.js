@@ -210,4 +210,15 @@ router.get("/listDitolak", verifyToken("admin"), async (req, res) => {
   }
 });
 
+// Route to reject pengajuan
+router.get("/historyAdmin", verifyToken("admin"), async (req, res) => {
+  try {
+    const user = await getUser(req, res);
+    res.render("admin/historyAdmin", { user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 module.exports = router;
