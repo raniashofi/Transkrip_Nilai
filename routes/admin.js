@@ -121,21 +121,27 @@ router.post("/setuju", async (req, res) => {
   }
 });
 
-// Route to reject pengajuan
-router.post("/tolak", verifyToken("admin"), async (req, res) => {
+// Route LIstDisetujui
+router.get("/listDisetujui", verifyToken("admin"), async (req, res) => {
   try {
-    const { id } = req.body;
-    const pengajuan = await Pengajuan.findByPk(id);
-    if (pengajuan) {
-      pengajuan.status = "ditolak";
-      await pengajuan.save();
-      res.redirect("back"); // Redirect back to the previous page
-    } else {
-      res.status(404).send("Pengajuan tidak ditemukan");
-    }
+    const user = await getUser(req, res);
+    const listDisetujui = await Pengajuan.findAll({ where: { status: 'diterima' } });
+    res.render("admin/listDisetujui", { user, listDisetujui });
   } catch (error) {
-    console.error("Error:", error);
-    res.status(500).send("Terjadi kesalahan");
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+
+// Route to reject pengajuan
+router.get("/listDitolak", verifyToken("admin"), async (req, res) => {
+  try {
+    const user = await getUser(req, res);
+    res.render("admin/listDitolak", { user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
 

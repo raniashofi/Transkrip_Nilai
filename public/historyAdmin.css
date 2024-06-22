@@ -24,9 +24,6 @@ body{
     align-items: center;
     font-family: 'Montserrat';
     width: 100%;
-    
-   
-   
 }
 
 .sidebar{
@@ -74,7 +71,6 @@ img{
     margin-top: -142px;
     position: absolute;
     z-index: 2;
-
 }
 
 h1{

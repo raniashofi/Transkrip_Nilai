@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notifikasi</title>
+    <link rel="stylesheet" href="/notifikasiMhs.css" />
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.worker.min.js"></script>
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="contcircle">
+        <div class="circle">
+          <img class="profilePNG" src="/Gambar/profile.png" alt="">
+        </div>
+      </div>
+      <div class="keterangan">
+        <a href="/dosen/profile">
+          <div class="nama"><%= user.nama %></div>
+          <div class="nim"><%= user.nim_nip %></div>
+        </a>
+      </div>
+      <div class="isi">
+        <a href="home"><h4>Dashboard</h4></a><br />
+        <a href="pengajuan"><h4 >Pengajuan</h4></a><br />
+        <a href="notifikasi"><h4 class="dashboard">Notifikasi</h4></a><br />
+        <a href="status"><h4>Status</h4></a><br />
+        <a href="history"><h4>History</h4></a><br />
+        <form id="logoutForm" action="/logout" method="POST">
+          <button
+            type="submit"
+            onclick="logout()"
+            style="background: none; border: none; cursor: pointer"
+          >
+            <h4>Logout</h4>
+          </button>
+        </form>
+        <div class="titik"></div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="container2">
+      <h1>Notifikasi Pengajuan</h1>
+
+      
+      <div class="notifications">
+        <div class="notification">
+            <div class="status-date">dd/mm/yyyy</div>
+            <div class="status-text">
+                Permintaan transkrip nilai pada dd/mm/yyyy dari semester [] - [] sudah disetujui admin
+            </div>
+            <div class="status-indicator approved"></div>
+        </div>
+
+        <div class="notification">
+            <div class="status-date">dd/mm/yyyy</div>
+            <div class="status-text">
+                Permintaan transkrip nilai pada dd/mm/yyyy dari semester [] - [] sedang diproses admin
+            </div>
+            <div class="status-indicator in-process"></div>
+        </div>
+
+        <div class="notification">
+            <div class="status-date">dd/mm/yyyy</div>
+            <div class="status-text">
+                Permintaan transkrip nilai pada dd/mm/yyyy dari semester [] - [] ditolak admin
+            </div>
+            <div class="status-indicator rejected"></div>
+        </div>
+    </div>
+  </body>
+</html>
