@@ -217,18 +217,22 @@ select{
 }
 
 .update{
-  padding: 8px;
-  padding-left: 30px;
-  padding-right: 30px;
+  width: 120px;
+  padding: 10px;
+  padding-bottom: 8px;
+  padding-top: 8px;
   border-radius: 25px;
   border: none;
   position: absolute;
-  background-color: #ffffff;
+  background-color: #c6e29d;
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.17);
   cursor: pointer;
+  color: #233323;
 }
 
 .update:hover{
-  background-color: #c6e29d;
+  color: #c6e29d;
+  background-color: #233323;
 }
 
 .buttonUpdate{

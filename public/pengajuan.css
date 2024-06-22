@@ -195,21 +195,19 @@ form{
 
 .buttonSub{
     display: block;
-    background-color: #536653;
-    width: 7%;
+    background-color: #c6e29d;
+    width: 120px;
     padding: 10px;
-    padding-bottom: 10px;
-    padding-top: 10px;
+    padding-bottom: 8px;
+    padding-top: 8px;
     border-radius: 30px;
     border: 0px;
-    font-weight: bold;
-    color: #ffffff;
+    font-weight: 700;
+    color: #233323;
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.17);
     margin: auto;
-    margin-right: 490px;
+    margin-right: 495px;
     margin-top: 15px;
-    font-weight: 400;
-    letter-spacing: 1px;
 }
 
 .buttonSub:hover{
