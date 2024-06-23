@@ -47,6 +47,15 @@ module.exports = {
       refresh_token: {
         type: Sequelize.TEXT,
       },
+      lulus_sarjana: {
+        type: Sequelize.STRING,
+      },
+      nomor_ijazah: {
+        type: Sequelize.STRING,
+      },
+      nip_dosenAKD: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

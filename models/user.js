@@ -51,6 +51,15 @@ module.exports = (sequelize, DataTypes) => {
     refresh_token: {
       type: DataTypes.TEXT,
     },
+    lulus_sarjana: {
+      type: DataTypes.STRING,
+    },
+    nomor_ijazah: {
+      type: DataTypes.STRING,
+    },
+    nip_dosenAKD: {
+      type: DataTypes.STRING,
+    },
   }, {
     sequelize,
     modelName: 'User',
