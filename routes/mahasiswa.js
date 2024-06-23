@@ -70,7 +70,7 @@ router.post(
 
       const { alasan } = req.body;
       const gambar = req.file ? req.file.filename : null;
-      if (!alasan) {
+      if (!alasan || !gambar) {
         return res.status(400).json({ message: "Data tidak lengkap" });
       }
 

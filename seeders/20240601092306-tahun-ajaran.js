@@ -5,10 +5,10 @@ module.exports = {
 
     await queryInterface.bulkInsert('TahunAjarans', [
       {
-      tahun_ajaran: '2021/2022',
+      tahun_ajaran: '2022/2023',
     },
     {
-      tahun_ajaran: '2022/2023',
+      tahun_ajaran: '2023/2024',
     },
   ], {});
   },

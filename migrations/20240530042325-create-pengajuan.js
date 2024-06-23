@@ -27,6 +27,10 @@ module.exports = {
         type: Sequelize.ENUM("diproses", "ditolak", "diterima"),
         allowNull: false
       },
+      file_transkrip: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

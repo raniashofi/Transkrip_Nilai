@@ -30,6 +30,10 @@ module.exports = (sequelize, DataTypes) => {
         model: 'Users',
         key: 'nim_nip'
       }
+    },
+    file_transkrip: {
+      type: DataTypes.STRING,
+      allowNull: true,
     }
   }, {
     sequelize,
