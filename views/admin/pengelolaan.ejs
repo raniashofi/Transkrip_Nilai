@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pengelolaan - Admin</title>
+    <link rel="stylesheet" href="/pengelolaanAdm.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="contcircle">
+        <div class="circle">
+          <img src="/Gambar/profile.png" alt="">
+        </div>
+      </div>
+      <div class="keterangan">
+        <a href="/admin/profile">
+          <div class="nama"><%= user.jurusan %></div>
+        </a>
+      </div>
+      <div class="isi">
+        <div class="isi2">
+          <a href="dashboard"><h4>Dashboard</h4></a><br />
+          <a href="pengelolaan"><h4 class="dashboard">Pengelolaan</h4></a><br />
+          <a href="historyAdmin"><h4>History</h4></a><br />
+          <form id="logoutForm" action="/logout" method="POST">
+            <button
+              type="submit"
+              onclick="logout()"
+              style="background: none; border: none; cursor: pointer"
+            >
+              <h4>Logout</h4>
+            </button>
+          </form>
+        </div>
+        <div class="titik"></div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="container2">
+        <h3>Pengelolaan Pengajuan</h3>
+        <div class="container3">
+          <div class="atas">
+            <div class="pengajuan">
+              <h2><%= countDiproses %></h2>
+              <h1>Pengajuan</h1>
+              <hr />
+              <a href="listPengajuan" class="more">more info</a>
+            </div>
+            <div class="disetujui">
+              <h2><%= countDiterima %></h2>
+              <h1>Disetujui</h1>
+              <hr />
+              <a href="listDisetujui" class="more">more info</a>
+            </div>
+          </div>
+          <div class="bawah">
+            <div class="ditolak">
+              <h2><%= countDitolak %></h2>
+              <h1>Ditolak</h1>
+              <hr />
+              <a href="listDitolak" class="more">more info</a>
+            </div>
+            <div class="history">
+              <h1>History</h1>
+              <hr />
+              <a href="historyAdmin" class="more">more info</a>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <script>
+      
+      function logout() {
+        fetch("/logout", {
+          method: "DELETE",
+        })
+          .then((response) => {
+            if (response.ok) {
+              window.location.href = "/login"; // Redirect to login page after successful logout
+            } else {
+              throw new Error("Failed to logout");
+            }
+          })
+          .catch((error) => {
+            console.error("Logout failed:", error);
+          });
+      }
+    </script>
+  </body>
+</html>
+

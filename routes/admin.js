@@ -9,6 +9,9 @@ const { Pengajuan, User, Transkrip } = require("../models/index");
 const PDFDocument = require("pdfkit");
 const fs = require("fs");
 const path = require("path");
+const PizZip = require('pizzip');
+const Docxtemplater = require('docxtemplater');
+const libre = require('libreoffice-convert');
 
 const router = express.Router();
 
@@ -63,17 +66,67 @@ router.post("/setuju", async (req, res) => {
       include: [
         {
           model: User,
-          include: [Transkrip],
+          include: [
+            {
+              model: Transkrip,
+              include: [MataKuliah]
+            }
+          ]
         },
       ],
     });
 
     if (pengajuan) {
-      // Update status to 'diterima'
       pengajuan.status = "diterima";
       await pengajuan.save();
 
-      // Generate PDF
+      // Load the DOCX template
+      const templatePath = path.resolve('public/template', 'template-transkrip.docx');
+      const content = fs.readFileSync(templatePath);
+      const zip = new PizZip(content);
+      const doc = new Docxtemplater(zip, {
+        paragraphLoop: true,
+        linebreaks: true,
+      });
+
+      const user = pengajuan.User;
+      const transkripData = user.Transkrips.map((transkrip, index) => ({
+        no: index + 1,
+        mata_kuliah: transkrip.MataKuliah.nama_matkul,
+        sks: transkrip.MataKuliah.sks,
+        nilai_huruf: transkrip.nilai_huruf,
+        nilai_mutu: transkrip.nilai_mutu,
+      }));
+
+      const jumlahSKS = transkripData.reduce((sum, item) => sum + item.sks, 0);
+      const jumlahMutu = transkripData.reduce((sum, item) => sum + item.nilai_mutu, 0);
+      const nilaiDCount = transkripData.filter(item => item.nilai_huruf === 'D').length;
+      const IPK = (jumlahMutu / jumlahSKS).toFixed(2);
+
+      doc.setData({
+        nama: user.nama,
+        nim_nip: user.nim_nip,
+        terdaftar_mulai: user.terdaftar_mulai,
+        jurusan: user.jurusan,
+        tempat_lahir: user.tempat_lahir,
+        tanggal_lahir: user.tanggal_lahir,
+        dosen_pembimbingTA: user.dosen_pembimbingTA,
+        dosen_pembimbingAKD: user.dosen_pembimbingAKD,
+        jumlah_sks: jumlahSKS,
+        jumlah_mutu: jumlahMutu,
+        IPK: IPK,
+        jumlah_nilai_huruf_D: nilaiDCount,
+        CreatedAt: new Date().toLocaleDateString(),
+        transkripData: transkripData
+      });
+
+      doc.render();
+
+      const buf = doc.getZip().generate({
+        type: 'nodebuffer',
+        compression: 'DEFLATE',
+      });
+
       const uploadsDir = path.join(__dirname, "../uploads");
       const pdfsDir = path.join(uploadsDir, "pdfs");
       if (!fs.existsSync(uploadsDir)) {
@@ -82,33 +135,45 @@ router.post("/setuju", async (req, res) => {
       if (!fs.existsSync(pdfsDir)) {
         fs.mkdirSync(pdfsDir, { recursive: true });
       }
+
       const timestamp = Date.now();
+      const docxFileName = `transkrip_${user.nim_nip}_${timestamp}.docx`;
+      const docxFilePath = path.join(pdfsDir, docxFileName);
+      fs.writeFileSync(docxFilePath, buf);
 
-      const pdfPath = path.join(
-        pdfsDir,
-        `transkrip_${pengajuan.User.nim_nip}_${timestamp}.pdf`
+      const pdfFileName = `transkrip_${user.nim_nip}_${timestamp}.pdf`;
+      const pdfFilePath = path.join('uploads', 'pdfs', pdfFileName);
+      fs.writeFileSync(pdfFilePath, result);
+
+      // Simpan path relatif untuk ejs
+      pengajuan.pdfPath = `pdfs/${pdfFileName}`;
+      await pengajuan.save();
+
+
+      // Convert DOCX to PDF using LibreOffice
+      libre.convert(
+        fs.readFileSync(docxFilePath),
+        '.pdf',
+        {
+          filter: 'Writer_pdf_Export',
+          format: 'pdf'
+        },
+        async (err, result) => {
+          if (err) {
+            console.error('Error converting DOCX to PDF:', err);
+            return res.status(500).send('Error converting DOCX to PDF');
+          }
+          fs.writeFileSync(pdfFilePath, result);
+          console.log('File converted successfully to PDF:', pdfFilePath);
+      
+          // Cleanup: delete the generated DOCX file after conversion
+          fs.unlinkSync(docxFilePath);
+      
+          // Provide download link or redirect to download page
+          res.redirect("back");
+        }
       );
-      const doc = new PDFDocument();
-      doc.pipe(fs.createWriteStream(pdfPath));
 
-      doc.fontSize(20).text("Transkrip Nilai", { align: "center" });
-      doc.fontSize(16).text(`Nama: ${pengajuan.User.nama}`, { align: "left" });
-      doc
-        .fontSize(16)
-        .text(`NIM: ${pengajuan.User.nim_nip}`, { align: "left" });
-
-      // Add grades to PDF
-      doc.moveDown();
-      doc.text("Daftar Nilai:", { align: "left" });
-      pengajuan.User.Transkrips.forEach((transkrip) => {
-        doc.text(`${transkrip.kode_matkul}: ${transkrip.nilai_huruf}`, {
-          align: "left",
-        });
-      });
-
-      doc.end();
-
-      res.redirect("back"); // Adjust the redirect path as necessary
     } else {
       res.status(404).send("Pengajuan tidak ditemukan");
     }
