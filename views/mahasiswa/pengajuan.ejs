@@ -4,20 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pengajuan</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="/pengajuan.css" />
   </head>
   <body>
     <div class="sidebar">
-      <div class="contcircle">
-        <div class="circle">
-          <img src="/Gambar/profile.png" alt="">
+      <div class="detailprofile">
+        <div class="contcircle">
+          <div class="circle">
+            <img src="/Gambar/profile.png" alt="" />
+          </div>
         </div>
-      </div>
-      <div class="keterangan">
-        <a href="/dosen/profile">
-          <div class="nama"><%= user.nama %></div>
-          <div class="nim"><%= user.nim_nip %></div>
-        </a>
+        <div class="keterangan">
+          <a href="/dosen/profile">
+            <div class="nama"><%= user.nama %></div>
+            <div class="nim"><%= user.nim_nip %></div>
+          </a>
+        </div>
       </div>
       <div class="isi">
         <a href="home"><h4>Dashboard</h4></a><br />
@@ -39,32 +42,60 @@
     </div>
     <div class="container">
       <div class="container2">
-      <h1>Form Pengajuan</h1>
-      <div class="isi2">
-      <form
-        action="/mahasiswa/pengajuan"
-        method="POST"
-        enctype="multipart/form-data"
-      >
-      <div class="label">
-        <label for="ktm">Bukti KTM/KRS</label><br/>
+        <h1>Form Pengajuan</h1>
+        <div class="isi2">
+          <form
+            id="pengajuan"
+            action="/mahasiswa/pengajuan"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <div class="label">
+              <label for="ktm">Bukti KTM/KRS</label><br />
+            </div>
+            <div class="divfile">
+              <input class="file" type="file" id="gambar" name="gambar" />
+            </div>
+            <br /><br /><br />
+            <label class="alasan" for="alasan">Alasan</label><br />
+            <div class="submit">
+              <textarea id="alasan" name="alasan" required></textarea>
+              <br />
+              <button class="buttonSub" type="submit" style="cursor: pointer">
+                Kirim
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-      <div class="divfile">
-        <input class="file" type="file" id="gambar" name="gambar"/> 
-      </div>
-        <br/><br/><br/>
-        <label class="alasan" for="alasan">Alasan</label><br />
-      <div class="submit">
-        <textarea id="alasan" name="alasan" required></textarea>
-        <br />
-        <button class="buttonSub" type="submit">Kirim</button>
-      </div>
-      </form>
-    </div>
-    </div>
     </div>
 
     <script>
+      document
+        .getElementById("pengajuan")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          const formData = new FormData(this);
+          try {
+            const response = await fetch("/mahasiswa/pengajuan", {
+              method: "POST",
+              body: formData,
+            });
+
+            if (response.ok) {
+              alert("Pengajuan berhasil");
+              window.location.href = "/mahasiswa/pengajuan";
+            } else {
+              const errorData = await response.json();
+              alert("Gagal menyimpan data: " + errorData.message);
+            }
+          } catch (error) {
+            console.error("Error:", error);
+            alert("Kesalahan: " + errorData.message);
+          }
+        });
+
       function logout() {
         fetch("/logout", {
           method: "DELETE",

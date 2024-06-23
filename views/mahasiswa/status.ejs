@@ -61,13 +61,13 @@
               <div class="status-list">
                 <div class="status-row">
                   <% if (item.status === 'diterima') { %>
-                    <a href="<%= item.pdfPath %>" download>
+                    <a href="/uploads/pdfs/<%= item.file_transkrip %>" download>
                       <div class="download">
                         <img class="icon" src="/Gambar/download.png" alt="Download Icon">
                       </div>
                     </a>
                     <div class="divbutton">
-                      <button class="preview" onclick="openPDFPreview('<%= item.pdfPath %>')">Preview</button>
+                      <button class="preview" onclick="openPDFPreview('/uploads/pdfs/<%= item.file_transkrip %>')">Preview</button>
                     </div>
                   <% } %>
                 </div>
