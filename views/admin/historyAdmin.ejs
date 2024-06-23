@@ -21,7 +21,7 @@
       <div class="isi">
         <div class="isi2">
           <a href="dashboard"><h4>Dashboard</h4></a><br />
-          <a href="pengelolaan"><h4>Pengelolaan</h4></a><br />
+          <a href="listPengajuan"><h4 >Pengelolaan</h4></a><br />
           <a href="historyAdmin"><h4 class="dashboard">History</h4></a><br />
           <form id="logoutForm" action="/logout" method="POST">
             <button
@@ -39,20 +39,103 @@
 
     <div class="container">
       <div class="container2">
-        <h1>History</h1>
-        <div class="list-pengajuan">
-
-          <div class="card" >
-            <div class="content">
-                <span>dd/mm/yyyy - [NIM/Nama Mahasiswa]</span>
-                <button class="status-button">Diproses</button>
-                <button class="toggle-button">▼</button>
-            </div>
+        <div class="search-container">
+          <div class="form-search">
+            <input type="text" id="search-bar" placeholder="Cari mahasiswa...">
+            <button id="search-button">Search</button></div>
+         </div>
+          <div class="list-pengajuan" id="list-pengajuan">
+              <% listPengajuan.forEach(function(pengajuan, index) { %>
+                  <div class="pengajuan-item">
+                      <div class="pengajuan-header">
+                          <div class="pengajuan-info">
+                              <span class="pengajuan-date"><%= pengajuan.createdAt.toLocaleDateString() %></span> - <span class="pengajuan-name"><%= pengajuan.nim_nip %> - <%= pengajuan.User.nama %></span>
+                          </div>
+                          <div class="pengajuan-status">
+                              <button class="status-button <% if (pengajuan.status === 'diproses') { %>status-diproses<% } else if (pengajuan.status === 'ditolak') { %>status-ditolak<% } else if (pengajuan.status === 'diterima') { %>status-diterima<% } %>">
+                                  <%= pengajuan.status %>
+                              </button>
+                              <button class="dropdown-button">&#9660;</button>
+                          </div>
+                      </div>
+                      <div class="dropdown-content">
+                          <div class="file">
+                              <a href="/uploads/user/<%= pengajuan.krs_ktm %>" target="_blank"><%= pengajuan.krs_ktm %></a>
+                          </div>
+                          <p><%= pengajuan.alasan %></p>
+                      </div>
+                  </div>
+              <% }) %>
           </div>
-        
-        </div>
       </div>
-    </div>
+  </div>
+
+  <script>
+    document.getElementById('search-button').addEventListener('click', function() {
+    const searchValue = document.getElementById('search-bar').value;
+    console.log(`Fetching results for: ${searchValue}`);
+    
+    fetch(`/admin/searchHistory?query=${encodeURIComponent(searchValue)}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Received data:', data);
+        const listPengajuan = document.getElementById('list-pengajuan');
+        listPengajuan.innerHTML = ''; // Clear previous results
+
+        data.listPengajuan.forEach(pengajuan => {
+            const pengajuanItem = document.createElement('div');
+            pengajuanItem.classList.add('pengajuan-item');
+
+            pengajuanItem.innerHTML = `
+                    <div class="pengajuan-header">
+                        <div class="pengajuan-info">
+                            <span class="pengajuan-date">${new Date(pengajuan.createdAt).toLocaleDateString()}</span> - <span class="pengajuan-name">${pengajuan.nim_nip} - ${pengajuan.User.nama}</span>
+                        </div>
+                        <div class="pengajuan-status">
+                            <button class="status-button ${pengajuan.status === 'diproses' ? 'status-diproses' : pengajuan.status === 'ditolak' ? 'status-ditolak' : 'status-diterima'}">
+                                ${pengajuan.status}
+                            </button>
+                            <button class="dropdown-button">&#9660;</button>
+                        </div>
+                    </div>
+                    <div class="dropdown-content-search">
+                        <div class="file">
+                            <a href="/uploads/user/${pengajuan.krs_ktm}" target="_blank">${pengajuan.krs_ktm}</a>
+                        </div>
+                        <p>${pengajuan.alasan}</p>
+                    </div>
+            `;
+
+
+            listPengajuan.appendChild(pengajuanItem);
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching search results:', error);
+    });
+});
+
+
+  </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+          $('.dropdown-button').click(function() {
+              $(this).parent().parent().next('.dropdown-content').slideToggle();
+          });
+      });
+  </script>
+
     <script>
       function logout() {
         fetch("/logout", {
@@ -72,4 +155,3 @@
     </script>
   </body>
 </html>
-q

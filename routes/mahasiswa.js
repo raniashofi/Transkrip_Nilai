@@ -6,6 +6,7 @@ const {
   changePassword,
 } = require("../controllers/auth.js");
 const { User, Pengajuan } = require("../models/index");
+const { getNotif } = require("../controllers/admin.js");
 const upload = require("../middleware/uploadFile");
 
 const router = express.Router();
@@ -13,6 +14,7 @@ const router = express.Router();
 router.get("/", (req, res) => {
   res.redirect("/mahasiswa/home");
 });
+router.get("/notifikasi", verifyToken("mahasiswa"), getNotif);
 
 router.get("/home", verifyToken("mahasiswa"), async (req, res) => {
   try {
