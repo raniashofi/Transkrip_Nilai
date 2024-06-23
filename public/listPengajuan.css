@@ -173,7 +173,15 @@ form{
     text-align: center; 
 }
 
+h3{
+  font-size: 25px;
+  margin-top: 40px;
+  margin-left: 40px;
+  position: absolute;
+}
+
 .list-pengajuan {
+  padding-top: 100px;
   display: flex;
   flex-direction: column;
   gap: 10px;
