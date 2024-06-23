@@ -3,17 +3,193 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Notifikasi</title>
-    <link rel="stylesheet" href="/notifikasiMhs.css" />
-    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.worker.min.js"></script>
+    <title>Pengajuan</title>
+    <link rel="stylesheet" href="/pengajuan.css" />
+    <style>
+
+.container{
+    width: 100%;
+    max-width: 2500px;
+    height: 100%;
+    background-color: #ffffff6c;
+    z-index: 1;
+    margin-left: -235px;
+}
+
+.keterangan {
+    position: absolute;
+    width: 100%;
+    max-width: 220px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    text-align: center;     
+    height: 100%;   
+    margin-top: -200px;
+}
+
+form{
+    margin-left: -95px;
+}
+
+
+.nama {
+    margin: auto;
+    color: #c6e29d;
+}
+
+.jurusan{
+    margin-left: 36px;
+    margin-top: 7px;
+}
+
+.container2{
+    background-color: #23332300;
+    border-width: 3px;
+    border-color: #233323;
+    border-radius: 20px;
+    border-style: solid;
+    width: 100%;
+    height: 93%;
+    max-width: 1220px;   
+    margin-top: 25px;
+    margin-left: 290px;
+    z-index: 3;
+    text-align: center; 
+}
+
+.list-pengajuan {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin:20px;
+}
+
+.pengajuan-item {
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.pengajuan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pengajuan-info {
+  font-size: 16px;
+  color: #233323;
+}
+
+
+.pengajuan-status {
+  display: flex;
+  align-items: center;
+}
+
+.status-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.dropdown-button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #233323;
+}
+
+.dropdown-button:hover {
+  color: #000;
+}
+
+.dropdown-content {
+  margin-top: 10px;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+.dropdown-content .file{
+  width: 100%;
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  margin-bottom:7px;
+  margin-top: 5px;
+}
+
+
+.dropdown-content p {
+  font-size: 14px;
+  color: #333;
+  text-align: start;
+}
+
+.dropdown-content .action-buttons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.dropdown-content .action-buttons button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dropdown-content .action-buttons .setuju {
+  background-color: #28a745;
+  color: white;
+}
+
+.dropdown-content .action-buttons .tolak {
+  background-color: #dc3545;
+  color: white;
+}
+
+
+.status-ditolak {
+  background-color: red;
+  color: white;
+  padding:15px;
+  border-radius: 50px;
+}
+
+.status-diterima {
+  background-color: green;
+  color: white;
+  border-radius: 50px;
+  padding:15px;
+}
+      .titik-notif{
+    background-color: #c6e29d;
+    max-width: 100%;
+    width: 13px;
+    max-height: 100%;
+    height: 32px;
+    border-radius: 0px 6px 6px 0px;
+    margin-top: -200px;
+    position: absolute;
+    z-index: 2;
+
+}
+    </style>
   </head>
   <body>
     <div class="sidebar">
       <div class="contcircle">
         <div class="circle">
-          <img class="profilePNG" src="/Gambar/profile.png" alt="">
+          <img src="/Gambar/profile.png" alt="">
         </div>
       </div>
       <div class="keterangan">
@@ -24,8 +200,8 @@
       </div>
       <div class="isi">
         <a href="home"><h4>Dashboard</h4></a><br />
-        <a href="pengajuan"><h4 >Pengajuan</h4></a><br />
-        <a href="notifikasi"><h4 class="dashboard">Notifikasi</h4></a><br />
+        <a href="pengajuan"><h4>Pengajuan</h4></a><br />
+        <a href="notifikasi"><h4  class="dashboard">Notifikasi</h4></a><br />
         <a href="status"><h4>Status</h4></a><br />
         <a href="history"><h4>History</h4></a><br />
         <form id="logoutForm" action="/logout" method="POST">
@@ -37,38 +213,49 @@
             <h4>Logout</h4>
           </button>
         </form>
-        <div class="titik"></div>
+        <div class="titik-notif"></div>
       </div>
     </div>
     <div class="container">
       <div class="container2">
-      <h1>Notifikasi Pengajuan</h1>
-
-      
-      <div class="notifications">
-        <div class="notification">
-            <div class="status-date">dd/mm/yyyy</div>
-            <div class="status-text">
-                Permintaan transkrip nilai pada dd/mm/yyyy dari semester [] - [] sudah disetujui admin
-            </div>
-            <div class="status-indicator approved"></div>
-        </div>
-
-        <div class="notification">
-            <div class="status-date">dd/mm/yyyy</div>
-            <div class="status-text">
-                Permintaan transkrip nilai pada dd/mm/yyyy dari semester [] - [] sedang diproses admin
-            </div>
-            <div class="status-indicator in-process"></div>
-        </div>
-
-        <div class="notification">
-            <div class="status-date">dd/mm/yyyy</div>
-            <div class="status-text">
-                Permintaan transkrip nilai pada dd/mm/yyyy dari semester [] - [] ditolak admin
-            </div>
-            <div class="status-indicator rejected"></div>
+        <div class="list-pengajuan">
+            <% listPengajuan.forEach(function(pengajuan, index) { %>
+                <div class="pengajuan-item">
+                    <div class="pengajuan-header">
+                        <div class="pengajuan-info">
+                            <span class="pengajuan-date"><%= pengajuan.createdAt.toLocaleDateString() %></span>
+                        </div>
+                        <div class="pengajuan-status">
+                          <button class="status-button <% if (pengajuan.status === 'diproses') {%>status-diproses<% } else if (pengajuan.status === 'ditolak') {  %>status-ditolak<%} else if (pengajuan.status === 'diterima') {%>status-diterima<%} %>">
+                            
+                        </button>
+                        </div>
+                    </div>
+                    <div class="dropdown-content">
+                       <p>Permintaan transkrip nilai pada <span><%= pengajuan.createdAt.toLocaleDateString() %></span> - <span><% if (pengajuan.status === 'ditolak') {%>Ditolak admin<%} else if (pengajuan.status === 'diterima') {%>Sudah disetujui admin<%} %></p>
+                    </div>
+                </div>
+            <% }) %>
         </div>
     </div>
+    </div>
+
+    <script>
+      function logout() {
+        fetch("/logout", {
+          method: "DELETE",
+        })
+          .then((response) => {
+            if (response.ok) {
+              window.location.href = "/login"; // Redirect to login page after successful logout
+            } else {
+              throw new Error("Failed to logout");
+            }
+          })
+          .catch((error) => {
+            console.error("Logout failed:", error);
+          });
+      }
+    </script>
   </body>
 </html>

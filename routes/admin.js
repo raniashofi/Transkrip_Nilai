@@ -4,7 +4,7 @@ const {
   getUser,
   getProfile,
 } = require("../controllers/auth.js");
-const { getListPengajuan } = require("../controllers/admin.js");
+const { getListPengajuan,getListDitolak,getListDisetujui,getHistory,searchHistory } = require("../controllers/admin.js");
 const { Pengajuan, User, Transkrip } = require("../models/index");
 const PDFDocument = require("pdfkit");
 const fs = require("fs");
@@ -16,13 +16,31 @@ router.get("/", (req, res) => {
   res.redirect("/dashboard");
 });
 
+router.get("/listPengajuan", verifyToken("admin"), getListPengajuan);
+router.get("/historyAdmin", verifyToken("admin"), getHistory);
+router.get("/searchHistory", verifyToken("admin"), searchHistory);
+router.get("/listDitolak", verifyToken("admin"), getListDitolak);
+router.get("/listDisetujui", verifyToken("admin"), getListDisetujui);
+
+
 router.get("/dashboard", verifyToken("admin"), async (req, res) => {
   try {
     const user = await getUser(req, res);
-    res.render("admin/dashboard", { user });
+
+    // Hitung jumlah pengajuan berdasarkan status
+    const countDiproses = await Pengajuan.count({ where: { status: 'diproses' } });
+    const countDiterima = await Pengajuan.count({ where: { status: 'diterima' } });
+    const countDitolak = await Pengajuan.count({ where: { status: 'ditolak' } });
+
+    res.render('admin/dashboard', {
+      user,
+      countDiproses,
+      countDiterima,
+      countDitolak
+    });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
@@ -36,28 +54,7 @@ router.get(
   getProfile
 );
 
-router.get('/pengelolaan', verifyToken('admin'), async (req, res) => {
-  try {
-    const user = await getUser(req, res);
 
-    // Hitung jumlah pengajuan berdasarkan status
-    const countDiproses = await Pengajuan.count({ where: { status: 'diproses' } });
-    const countDiterima = await Pengajuan.count({ where: { status: 'diterima' } });
-    const countDitolak = await Pengajuan.count({ where: { status: 'ditolak' } });
-
-    res.render('admin/pengelolaan', {
-      user,
-      countDiproses,
-      countDiterima,
-      countDitolak
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
-});
-
-router.get("/listPengajuan", verifyToken("admin"), getListPengajuan);
 
 router.post("/setuju", async (req, res) => {
   try {
@@ -121,27 +118,21 @@ router.post("/setuju", async (req, res) => {
   }
 });
 
-// Route LIstDisetujui
-router.get("/listDisetujui", verifyToken("admin"), async (req, res) => {
-  try {
-    const user = await getUser(req, res);
-    const listDisetujui = await Pengajuan.findAll({ where: { status: 'diterima' } });
-    res.render("admin/listDisetujui", { user, listDisetujui });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-});
-
-
 // Route to reject pengajuan
-router.get("/listDitolak", verifyToken("admin"), async (req, res) => {
+router.post("/tolak", verifyToken("admin"), async (req, res) => {
   try {
-    const user = await getUser(req, res);
-    res.render("admin/listDitolak", { user });
+    const { id } = req.body;
+    const pengajuan = await Pengajuan.findByPk(id);
+    if (pengajuan) {
+      pengajuan.status = "ditolak";
+      await pengajuan.save();
+      res.redirect("back"); // Redirect back to the previous page
+    } else {
+      res.status(404).send("Pengajuan tidak ditemukan");
+    }
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("Error:", error);
+    res.status(500).send("Terjadi kesalahan");
   }
 });
 

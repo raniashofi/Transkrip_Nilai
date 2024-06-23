@@ -21,7 +21,7 @@
       <div class="isi">
         <div class="isi2">
           <a href="dashboard"><h4>Dashboard</h4></a><br />
-          <a href="pengelolaan"><h4 class="dashboard">Pengelolaan</h4></a><br />
+          <a href="listPengajuan"><h4 class="dashboard">Pengelolaan</h4></a><br />
           <a href="historyAdmin"><h4>History</h4></a><br />
           <form id="logoutForm" action="/logout" method="POST">
             <button
@@ -39,86 +39,62 @@
 
     <div class="container">
       <div class="container2">
-        <h1>List Pengajuan</h1>
         <div class="list-pengajuan">
-
-
-          <div class="card" >
-            <div class="content">
-                <span>dd/mm/yyyy - [NIM/Nama Mahasiswa]</span>
-                <button class="status-button">Diproses</button>
-                <button class="toggle-button">▼</button>
-            </div>
+            <% listPengajuan.forEach(function(pengajuan, index) { %>
+                <div class="pengajuan-item">
+                    <div class="pengajuan-header">
+                        <div class="pengajuan-info">
+                            <span class="pengajuan-date"><%= pengajuan.createdAt.toLocaleDateString() %></span> - <span class="pengajuan-name"><%= pengajuan.nim_nip %></span>
+                        </div>
+                        <div class="pengajuan-status">
+                          <button class="status-button <% if (pengajuan.status === 'diproses') { %>status-diproses<% } else if (pengajuan.status === 'ditolak') { %>status-ditolak<% } else if (pengajuan.status === 'diterima') { %>status-diterima<% } %>">
+                            <%= pengajuan.status %>
+                        </button>
+                            <button class="dropdown-button">&#9660;</button>
+                        </div>
+                    </div>
+                    <div class="dropdown-content">
+                       <div  class="file" >
+                        <a href="/uploads/user/<%= pengajuan.krs_ktm %>" ><%= pengajuan.krs_ktm %></a>
+                       </div>
+                        <p><%= pengajuan.alasan %></p>
+                        <div class="action-buttons">
+                            <button class="tolak" data-id="<%= pengajuan.idPengajuan %>">Tolak</button>
+                            <button class="setuju" data-id="<%= pengajuan.idPengajuan %>">Setuju</button>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
         </div>
-        <div class="card">
-            <div class="content">
-                <span>dd/mm/yyyy - [NIM/Nama Mahasiswa]</span>
-                <button class="status-button">Diproses</button>
-                <button class="toggle-button">▼</button>
-            </div>
-        </div>
-        <div class="card">
-            <div class="content">
-                <span>dd/mm/yyyy - [NIM/Nama Mahasiswa]</span>
-                <button class="status-button">Diproses</button>
-                <button class="toggle-button">▼</button>
-            </div>
-        </div>
-
-          <table>
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>NIM/NIP</th>
-                <th>Jurusan</th>
-                <th>Email</th>
-                <th>KRS/KTM</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% listPengajuan.forEach(function(pengajuan, index) { %> <% if
-              (pengajuan.status === 'diproses') { %>
-
-              <tr>
-                <td><%= index + 1 %></td>
-                <td><%= pengajuan.User.nama %></td>
-                <td><%= pengajuan.nim_nip %></td>
-                <td><%= pengajuan.User.jurusan %></td>
-                <td><%= pengajuan.User.email %></td>
-                <td>
-                  <a
-                    href="/uploads/user_<%= pengajuan.nim_nip%>/<%= pengajuan.krs_ktm %>"
-                    >Lihat</a
-                  >
-                </td>
-                <% if (pengajuan.status === 'diproses') { %>
-                <td>
-                  <form action="/admin/setuju" method="post">
-                    <input
-                      type="hidden"
-                      name="id"
-                      value="<%= pengajuan.idPengajuan %>"
-                    />
-                    <button type="submit">Setuju</button>
-                  </form>
-                  <form action="/admin/tolak" method="post">
-                    <input
-                      type="hidden"
-                      name="id"
-                      value="<%= pengajuan.idPengajuan %>"
-                    /><button type="submit">Tolak</button>
-                  </form>
-                </td>
-                <% } %>
-              </tr>
-              <% } %> <% }) %>
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+          $('.dropdown-button').click(function() {
+              $(this).parent().parent().next('.dropdown-content').slideToggle();
+          });
+
+          $('.setuju').click(function(event) {
+              event.preventDefault();
+              const id = $(this).data('id');
+              $.post('/admin/setuju', { id: id }, function(response) {
+                  alert('Pengajuan disetujui!');
+                  location.reload();
+              });
+          });
+
+          $('.tolak').click(function(event) {
+              event.preventDefault();
+              const id = $(this).data('id');
+              $.post('/admin/tolak', { id: id }, function(response) {
+                  alert('Pengajuan ditolak!');
+                  location.reload();
+              });
+          });
+      });
+  </script>
+
     <script>
       function logout() {
         fetch("/logout", {

@@ -22,11 +22,9 @@ body{
     background-repeat: no-repeat;
     height: 100vh;
     align-items: center;
+    display: flex;
     font-family: 'Montserrat';
     width: 100%;
-    
-   
-   
 }
 
 .sidebar{
@@ -175,68 +173,117 @@ form{
     text-align: center; 
 }
 
-table{
-    border-collapse: collapse;
-    margin: auto;
-    margin-top: 50px;
-    width: 1125px;
-}
-  table td, table th {
-    padding: 8px;
-    text-align: start;
-  }
-  
-  table tr:nth-child(even){background-color: #f4faeb;}
-  
-  table tr:hover {background-color: #c6e29d;}
-  
-  table th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #deedc8;
-    color: #233323;
-  }
-
-.list-pengajuan{
-    margin-top: 110px;
+.list-pengajuan {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin:20px;
 }
 
-.card {
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 1100px;
-    padding: 15px;
-    margin: 20px;
-    text-align: left;
-    font-weight: bold;
+.pengajuan-item {
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-.content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.pengajuan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-span {
-    flex: 1;
+.pengajuan-info {
+  font-size: 16px;
+  color: #233323;
 }
 
-.status-button, .toggle-button {
-    border: none;
-    border-radius: 20px;
-    padding: 5px 10px;
-    cursor: pointer;
-    margin-left: 5px;
+
+.pengajuan-status {
+  display: flex;
+  align-items: center;
 }
 
 .status-button {
-    background-color: #7a9465;
-    color: white;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-right: 10px;
 }
 
-.toggle-button {
-    background: transparent;
-    font-size: 16px;
+.dropdown-button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #233323;
+}
+
+.dropdown-button:hover {
+  color: #000;
+}
+
+.dropdown-content {
+  display: none;
+  margin-top: 10px;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+.dropdown-content .file{
+  width: 100%;
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  margin-bottom:7px;
+  margin-top: 5px;
+}
+
+
+.dropdown-content p {
+  font-size: 14px;
+  color: #333;
+  text-align: start;
+}
+
+.dropdown-content .action-buttons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.dropdown-content .action-buttons button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dropdown-content .action-buttons .setuju {
+  background-color: #28a745;
+  color: white;
+}
+
+.dropdown-content .action-buttons .tolak {
+  background-color: #dc3545;
+  color: white;
+}
+
+.status-diproses {
+  background-color: orange;
+  color: white;
+}
+
+.status-ditolak {
+  background-color: red;
+  color: white;
+}
+
+.status-diterima {
+  background-color: green;
+  color: white;
 }

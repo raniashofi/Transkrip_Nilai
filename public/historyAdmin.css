@@ -22,6 +22,7 @@ body{
     background-repeat: no-repeat;
     height: 100vh;
     align-items: center;
+    display: flex;
     font-family: 'Montserrat';
     width: 100%;
 }
@@ -68,9 +69,10 @@ img{
     max-height: 100%;
     height: 32px;
     border-radius: 0px 6px 6px 0px;
-    margin-top: -142px;
+    margin-top: -89px;
     position: absolute;
     z-index: 2;
+
 }
 
 h1{
@@ -120,14 +122,7 @@ a{
     margin-left: -8px;
 }
 
-.container{
-    width: 100%;
-    max-width: 2500px;
-    height: 100%;
-    background-color: #ffffff6c;
-    z-index: 1;
-    margin-left: -235px;
-}
+
 
 .keterangan {
     position: absolute;
@@ -156,83 +151,166 @@ form{
     margin-top: 7px;
 }
 
+.container{
+  width: 100%;
+  max-width: 2500px;
+  height: 100%;
+  background-color: #ffffff6c;
+  z-index: 1;
+  margin-left: -235px;
+}
+
 .container2{
-    background-color: #23332300;
-    border-width: 3px;
-    border-color: #233323;
-    border-radius: 20px;
-    border-style: solid;
-    width: 100%;
-    height: 93%;
-    max-width: 1220px;   
-    margin-top: 25px;
-    margin-left: 290px;
-    z-index: 3;
-    text-align: center; 
+  background-color: #23332300;
+  border-width: 3px;
+  border-color: #233323;
+  border-radius: 20px;
+  border-style: solid;
+  width: 100%;
+  height: 93%;
+  max-width: 1220px;   
+  margin-top: 25px;
+  margin-left: 290px;
+  z-index: 3;
+  text-align: center; 
 }
 
-table{
-    border-collapse: collapse;
-    margin: auto;
-    margin-top: 50px;
-    width: 1125px;
-}
-  table td, table th {
-    padding: 8px;
-    text-align: start;
-  }
-  
-  table tr:nth-child(even){background-color: #f4faeb;}
-  
-  table tr:hover {background-color: #c6e29d;}
-  
-  table th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #deedc8;
-    color: #233323;
-  }
-
-.list-pengajuan{
-    margin-top: 110px;
+.list-pengajuan {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin:20px;
 }
 
-.card {
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 1100px;
-    padding: 15px;
-    margin: 20px;
-    text-align: left;
-    font-weight: bold;
+.pengajuan-item {
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-.content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.pengajuan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-span {
-    flex: 1;
+.pengajuan-info {
+  font-size: 16px;
+  color: #233323;
 }
 
-.status-button, .toggle-button {
-    border: none;
-    border-radius: 20px;
-    padding: 5px 10px;
-    cursor: pointer;
-    margin-left: 5px;
+.pengajuan-status {
+  display: flex;
+  align-items: center;
 }
 
 .status-button {
-    background-color: #7a9465;
-    color: white;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-right: 10px;
 }
 
-.toggle-button {
-    background: transparent;
-    font-size: 16px;
+.dropdown-button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #233323;
+}
+
+.dropdown-button:hover {
+  color: #000;
+}
+
+.dropdown-content {
+  display: none;
+  margin-top: 10px;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+.dropdown-content .file{
+  width: 100%;
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  margin-bottom:7px;
+  margin-top: 5px;
+}
+
+.dropdown-content p {
+  font-size: 14px;
+  color: #333;
+  text-align: start;
+}
+
+.dropdown-content .action-buttons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.dropdown-content .action-buttons button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dropdown-content .action-buttons .setuju {
+  background-color: #28a745;
+  color: white;
+}
+
+.dropdown-content .action-buttons .tolak {
+  background-color: #dc3545;
+  color: white;
+}
+
+.status-diproses {
+  background-color: orange;
+  color: white;
+}
+
+.status-ditolak {
+  background-color: red;
+  color: white;
+}
+
+.status-diterima {
+  background-color: green;
+  color: white;
+}
+
+/* Search bar styling */
+.search-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.search-container input[type="text"] {
+  width: 80%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.search-container button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+}
+
+.pengajuan-item:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
 }
