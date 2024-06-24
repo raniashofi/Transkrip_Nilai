@@ -10,9 +10,16 @@ body{
 
     background-color: white;
     display: flex;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.284), rgba(255, 255, 255, 0.223));
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.284),
+      rgba(255, 255, 255, 0.223)
+    );
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    border-radius: 20px 20px 20px 20px;
     margin: auto;
     background-image: url(./Gambar/Unand.jpg);
     background-size: cover;
@@ -20,7 +27,8 @@ body{
     height: 100vh;
     align-items: center;
     display: flex;
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
+    width: 100%;
 }
 
 .sidebar{
