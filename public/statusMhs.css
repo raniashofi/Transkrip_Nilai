@@ -152,18 +152,18 @@ form {
   margin-left: 260px;
   z-index: 3;
   text-align: center;
+  overflow-y: auto;
 }
 
-.container3{
-  margin-top: 110px;
+.container3 {
+  margin-top: 50px;
   margin-left: 40px;
 }
 
 h1 {
   font-size: 25px;
-  margin-top: 40px;
-  margin-left: 40px;
-  position: absolute;
+  text-align: start;
+  margin: 40px;
 }
 
 .detail {
@@ -180,12 +180,28 @@ h1 {
 }
 
 .detail.expanded {
-  height: 190px; /* Height when expanded */
+  height: 220px; /* Height when expanded */
 }
 
 h3 {
   color: #000000;
   text-align: start;
+}
+
+.file {
+  width: 270px;
+  height: 40px;
+  background-color: #c6e29d;
+  border-radius: 15px;
+  padding-top: 10px;
+  margin-bottom: 15px;
+}
+
+.pfile {
+  color: #000000;
+  text-decoration: none;
+  margin: 0;
+  text-align: center;
 }
 
 p {
@@ -197,7 +213,7 @@ p {
 .container .detail .konten .atas {
   display: flex;
   justify-content: space-between; /* Added to align the h3 and panah */
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .container .detail .konten {
@@ -237,7 +253,7 @@ p {
   cursor: pointer;
 }
 
-.preview:hover{
+.preview:hover {
   background-color: #536653;
   color: #ffffff;
 }
@@ -251,6 +267,10 @@ p {
   cursor: pointer;
   font-size: 18px; /* Add font size for visibility */
   user-select: none; /* Prevent text selection */
+}
+
+.status-list{
+  margin-top: -18px;
 }
 
 .statuspengajuan {
@@ -269,7 +289,7 @@ p {
   border-radius: 20px;
 }
 
-.divstatus.diproses{
+.divstatus.diproses {
   border-width: 2px;
   border-style: solid;
 }
@@ -285,4 +305,3 @@ p {
   background-color: #536653;
   color: #c6e29d;
 }
-

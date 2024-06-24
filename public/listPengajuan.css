@@ -205,11 +205,12 @@ form{
 }
 
 .status-button {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 12px;
+  border-width: 2px;
+  border-style: solid;
+  width: 100px;
+  height: 30px;
+  padding: 5px;
+  border-radius: 20px;
   font-size: 14px;
   cursor: pointer;
   margin-right: 10px;
@@ -264,26 +265,28 @@ form{
 }
 
 .dropdown-content .action-buttons .setuju {
-  background-color: #28a745;
+  background-color: #233323;
   color: white;
 }
 
 .dropdown-content .action-buttons .tolak {
-  background-color: #dc3545;
-  color: white;
+  border-width: 2px;
+  border-style: solid;
 }
 
 .status-diproses {
-  background-color: orange;
-  color: white;
+  border-width: 2px;
+  border-style: solid;
 }
 
 .status-ditolak {
-  background-color: red;
-  color: white;
+  padding-top: 7px;
+  background-color: #536653;
+  color: #c6e29d;
 }
 
 .status-diterima {
-  background-color: green;
-  color: white;
+  padding-top: 7px;
+  background-color: #c6e29d;
+  color: #233323;
 }

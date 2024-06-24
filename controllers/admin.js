@@ -1,5 +1,5 @@
 const { getUser } = require("../controllers/auth.js");
-const { Op } = require('sequelize');
+const { Op } = require("sequelize");
 const { User, Pengajuan } = require("../models/index");
 
 exports.getListPengajuan = async (req, res) => {
@@ -10,7 +10,7 @@ exports.getListPengajuan = async (req, res) => {
         {
           model: User,
           attributes: ["nama", "email", "fakultas", "jurusan"],
-        }, 
+        },
       ],
     });
 
@@ -25,15 +25,15 @@ exports.getNotif = async (req, res) => {
   try {
     const user = await getUser(req, res);
     const listPengajuan = await Pengajuan.findAll({
-      where : { 
-        status : ['diterima', 'ditolak'], 
-        nim_nip : user.nim_nip
+      where: {
+        status: ["diterima", "ditolak"],
+        nim_nip: user.nim_nip,
       },
       include: [
         {
           model: User,
           attributes: ["nama", "email", "fakultas", "jurusan"],
-        }, 
+        },
       ],
     });
 
@@ -49,13 +49,13 @@ exports.getHistory = async (req, res) => {
     const user = await getUser(req, res);
     const listPengajuan = await Pengajuan.findAll({
       where: {
-        status: ['diterima', 'ditolak'],  
+        status: ["diterima", "ditolak"],
       },
       include: [
         {
           model: User,
           attributes: ["nama", "email", "fakultas", "jurusan"],
-        }, 
+        },
       ],
     });
 
@@ -73,30 +73,30 @@ exports.searchHistory = async (req, res) => {
 
     const listPengajuan = await Pengajuan.findAll({
       where: {
-        status: ['diterima', 'ditolak'],
+        status: ["diterima", "ditolak"],
         [Op.or]: [
           {
-            '$User.nama$': {
-              [Op.like]: `%${query}%`
-            }
+            "$User.nama$": {
+              [Op.like]: `%${query}%`,
+            },
           },
           {
             status: {
-              [Op.like]: `%${query}%`
-            }
+              [Op.like]: `%${query}%`,
+            },
           },
           {
             alasan: {
-              [Op.like]: `%${query}%`
-            }
-          }
-        ]
+              [Op.like]: `%${query}%`,
+            },
+          },
+        ],
       },
       include: [
         {
           model: User,
           attributes: ["nama", "email", "fakultas", "jurusan"],
-        }
+        },
       ],
     });
 
@@ -106,7 +106,6 @@ exports.searchHistory = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
 
 exports.getListDitolak = async (req, res) => {
   try {
@@ -121,7 +120,10 @@ exports.getListDitolak = async (req, res) => {
       ],
     });
 
-    res.render("admin/listDitolak", { user, listPengajuan: listPengajuanDitolak });
+    res.render("admin/listDitolak", {
+      user,
+      listPengajuan: listPengajuanDitolak,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
@@ -136,17 +138,17 @@ exports.getListDisetujui = async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ["nama", "email", "fakultas", "jurusan"],
+          attributes: ["nim_nip", "nama", "email", "fakultas", "jurusan"],
         },
       ],
     });
 
-    res.render("admin/listDisetujui", { user, listPengajuan: listPengajuandisetujui });
+    res.render("admin/listDisetujui", {
+      user,
+      listPengajuan: listPengajuandisetujui,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
-
-

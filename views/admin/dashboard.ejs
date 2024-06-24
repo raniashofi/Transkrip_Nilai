@@ -21,7 +21,7 @@
       <div class="isi">
         <div class="isi2">
           <a href="dashboard"><h4 class="dashboard">Dashboard</h4></a><br />
-          <a href="listPengajuan"><h4>Pengelolaan</h4></a><br />
+          <a href="pengelolaan"><h4>Pengelolaan</h4></a><br />
           <a href="historyAdmin"><h4>History</h4></a><br />
           <form id="logoutForm" action="/logout" method="POST">
             <button
@@ -38,37 +38,9 @@
     </div>
     <div class="container">
       <div class="container2">
-        <h3>Pengelolaan Pengajuan</h3>
-        <div class="container3">
-          <div class="atas">
-            <div class="pengajuan">
-              <h2><%= countDiproses %></h2>
-              <h1>Pengajuan</h1>
-              <hr />
-              <a href="listPengajuan" class="more">more info</a>
-            </div>
-            <div class="disetujui">
-              <h2><%= countDiterima %></h2>
-              <h1>Disetujui</h1>
-              <hr />
-              <a href="listDisetujui" class="more">more info</a>
-            </div>
-          </div>
-          <div class="bawah">
-            <div class="ditolak">
-              <h2><%= countDitolak %></h2>
-              <h1>Ditolak</h1>
-              <hr />
-              <a href="listDitolak" class="more">more info</a>
-            </div>
-            <div class="history">
-              <h1>History</h1>
-              <hr />
-              <a href="historyAdmin" class="more">more info</a>
-            </div>
-          </div>
-        </div>
-        
+        <h1>Selamat Datang!</h1>
+        <h3>Lihat pengajuan</h3>
+        <a href="/admin/pengelolaan"><button class="mulai">Lihat</button></a>
       </div>
     </div>
     <script>

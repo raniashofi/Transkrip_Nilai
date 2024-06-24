@@ -56,18 +56,25 @@
                 <div class="panah" onclick="toggleDetail('<%= index %>')">▼</div>
               </div>
               <div class="alasan">
+                <div class="file">
+                  <a class="pfile"
+                    href="/user_<%= item.nim_nip %>/<%= item.krs_ktm %>"
+                    target="_blank"
+                    ><%= item.krs_ktm %>
+                  </a>
+                </div>
                 <p><%= item.alasan %></p>
               </div>
               <div class="status-list">
                 <div class="status-row">
                   <% if (item.status === 'diterima') { %>
-                    <a href="/uploads/pdfs/<%= item.file_transkrip %>" download>
+                    <a href="/pdfs/<%= item.file_transkrip %>" download>
                       <div class="download">
                         <img class="icon" src="/Gambar/download.png" alt="Download Icon">
                       </div>
                     </a>
                     <div class="divbutton">
-                      <button class="preview" onclick="openPDFPreview('/uploads/pdfs/<%= item.file_transkrip %>')">Preview</button>
+                      <button class="preview" onclick="openPDFPreview('/pdfs/<%= item.file_transkrip %>')">Preview</button>
                     </div>
                   <% } %>
                 </div>

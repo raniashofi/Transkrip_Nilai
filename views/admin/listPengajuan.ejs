@@ -10,7 +10,7 @@
     <div class="sidebar">
       <div class="contcircle">
         <div class="circle">
-          <img src="/Gambar/profile.png" alt="">
+          <img src="/Gambar/profile.png" alt="" />
         </div>
       </div>
       <div class="keterangan">
@@ -21,7 +21,8 @@
       <div class="isi">
         <div class="isi2">
           <a href="dashboard"><h4>Dashboard</h4></a><br />
-          <a href="listPengajuan"><h4 class="dashboard">Pengelolaan</h4></a><br />
+          <a href="pengelolaan"><h4 class="dashboard">Pengelolaan</h4></a
+          ><br />
           <a href="historyAdmin"><h4>History</h4></a><br />
           <form id="logoutForm" action="/logout" method="POST">
             <button
@@ -40,60 +41,72 @@
     <div class="container">
       <div class="container2">
         <div class="list-pengajuan">
-            <% listPengajuan.forEach(function(pengajuan, index) { %>
-                <div class="pengajuan-item">
-                    <div class="pengajuan-header">
-                        <div class="pengajuan-info">
-                            <span class="pengajuan-date"><%= pengajuan.createdAt.toLocaleDateString() %></span> - <span class="pengajuan-name"><%= pengajuan.nim_nip %></span>
-                        </div>
-                        <div class="pengajuan-status">
-                          <button class="status-button <% if (pengajuan.status === 'diproses') { %>status-diproses<% } else if (pengajuan.status === 'ditolak') { %>status-ditolak<% } else if (pengajuan.status === 'diterima') { %>status-diterima<% } %>">
-                            <%= pengajuan.status %>
-                        </button>
-                            <button class="dropdown-button">&#9660;</button>
-                        </div>
-                    </div>
-                    <div class="dropdown-content">
-                       <div  class="file" >
-                        <a href="/uploads/user/<%= pengajuan.krs_ktm %>" ><%= pengajuan.krs_ktm %></a>
-                       </div>
-                        <p><%= pengajuan.alasan %></p>
-                        <div class="action-buttons">
-                            <button class="tolak" data-id="<%= pengajuan.idPengajuan %>">Tolak</button>
-                            <button class="setuju" data-id="<%= pengajuan.idPengajuan %>">Setuju</button>
-                        </div>
-                    </div>
-                </div>
-            <% }) %>
+          <% listPengajuan.forEach(function(pengajuan, index) { %> <% if
+          (pengajuan.status === 'diproses') { %>
+          <div class="pengajuan-item">
+            <div class="pengajuan-header">
+              <div class="pengajuan-info">
+                <span class="pengajuan-date"
+                  ><%= pengajuan.createdAt.toLocaleDateString() %></span
+                >
+                - <span class="pengajuan-name"><%= pengajuan.nim_nip %></span>
+              </div>
+              <div class="pengajuan-status">
+                <button
+                  class="status-button <% if (pengajuan.status === 'diproses') { %>status-diproses<% } else if (pengajuan.status === 'ditolak') { %>status-ditolak<% } else if (pengajuan.status === 'diterima') { %>status-diterima<% } %>"
+                >
+                  <%= pengajuan.status %>
+                </button>
+                <button class="dropdown-button">&#9660;</button>
+              </div>
+            </div>
+            <div class="dropdown-content">
+              <div class="file">
+                <a href="/uploads/user/<%= pengajuan.krs_ktm %>"
+                  ><%= pengajuan.krs_ktm %></a
+                >
+              </div>
+              <p><%= pengajuan.alasan %></p>
+              <div class="action-buttons">
+                <button class="tolak" data-id="<%= pengajuan.idPengajuan %>">
+                  Tolak
+                </button>
+                <button class="setuju" data-id="<%= pengajuan.idPengajuan %>">
+                  Setuju
+                </button>
+              </div>
+            </div>
+          </div>
+          <% } %> <% }) %>
         </div>
-    </div>
+      </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-      $(document).ready(function() {
-          $('.dropdown-button').click(function() {
-              $(this).parent().parent().next('.dropdown-content').slideToggle();
-          });
+      $(document).ready(function () {
+        $(".dropdown-button").click(function () {
+          $(this).parent().parent().next(".dropdown-content").slideToggle();
+        });
 
-          $('.setuju').click(function(event) {
-              event.preventDefault();
-              const id = $(this).data('id');
-              $.post('/admin/setuju', { id: id }, function(response) {
-                  alert('Pengajuan disetujui!');
-                  location.reload();
-              });
+        $(".setuju").click(function (event) {
+          event.preventDefault();
+          const id = $(this).data("id");
+          $.post("/admin/setuju", { id: id }, function (response) {
+            alert("Pengajuan disetujui!");
+            location.reload();
           });
+        });
 
-          $('.tolak').click(function(event) {
-              event.preventDefault();
-              const id = $(this).data('id');
-              $.post('/admin/tolak', { id: id }, function(response) {
-                  alert('Pengajuan ditolak!');
-                  location.reload();
-              });
+        $(".tolak").click(function (event) {
+          event.preventDefault();
+          const id = $(this).data("id");
+          $.post("/admin/tolak", { id: id }, function (response) {
+            alert("Pengajuan ditolak!");
+            location.reload();
           });
+        });
       });
-  </script>
+    </script>
 
     <script>
       function logout() {
