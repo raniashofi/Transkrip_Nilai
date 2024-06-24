@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pengelolaan - Admin</title>
+    <title>Pengelolaan</title>
     <link rel="stylesheet" href="/pengelolaanAdm.css" />
   </head>
   <body>
@@ -15,12 +15,12 @@
       </div>
       <div class="keterangan">
         <a href="/admin/profile">
-          <div class="nama"><%= user.jurusan %></div>
+          <span><%= user.jurusan %></span>
         </a>
       </div>
       <div class="isi">
         <div class="isi2">
-          <a href="dashboard"><h4>Dashboard</h4></a><br />
+          <a href="dashboard"><h4 >Dashboard</h4></a><br />
           <a href="pengelolaan"><h4 class="dashboard">Pengelolaan</h4></a><br />
           <a href="historyAdmin"><h4>History</h4></a><br />
           <form id="logoutForm" action="/logout" method="POST">
@@ -36,7 +36,6 @@
         <div class="titik"></div>
       </div>
     </div>
-
     <div class="container">
       <div class="container2">
         <h3>Pengelolaan Pengajuan</h3>
@@ -72,9 +71,7 @@
         
       </div>
     </div>
-
     <script>
-      
       function logout() {
         fetch("/logout", {
           method: "DELETE",
@@ -93,4 +90,3 @@
     </script>
   </body>
 </html>
-
