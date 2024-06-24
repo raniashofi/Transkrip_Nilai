@@ -3,7 +3,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('Transkrips', [
-    //mahasiswa 1
       {
       nim_nip: '2211523014',
       kode_matkul: 'JSI/1/101/A',
@@ -65,7 +64,6 @@ module.exports = {
       tahun_ajaran: '2023/2024',
     },
 
-    //mahasiswa 2
     {
       nim_nip: '2211521004',
       kode_matkul: 'JSI/1/101/A',
@@ -127,7 +125,6 @@ module.exports = {
       tahun_ajaran: '2023/2024',
     },
 
-    //mahasiswa 3
     {
       nim_nip: '2211523010',
       kode_matkul: 'JSI/1/101/A',
@@ -189,7 +186,6 @@ module.exports = {
       tahun_ajaran: '2023/2024',
     },
 
-    //mahasiswa 4
     {
       nim_nip: '2211521002',
       kode_matkul: 'JSI/1/101/B',
@@ -251,7 +247,6 @@ module.exports = {
       tahun_ajaran: '2023/2024',
     },
 
-    //mahasiswa 5
     {
       nim_nip: '2211523016',
       kode_matkul: 'JSI/1/101/B',

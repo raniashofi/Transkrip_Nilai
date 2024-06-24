@@ -168,11 +168,12 @@ form{
   border-style: solid;
   width: 100%;
   height: 93%;
-  max-width: 1220px;   
+  max-width: 1240px;
   margin-top: 25px;
-  margin-left: 290px;
+  margin-left: 260px;
   z-index: 3;
-  text-align: center; 
+  text-align: center;
+  overflow-y: auto; 
 }
 
 .list-pengajuan {
@@ -222,10 +223,12 @@ form{
   font-size: 18px;
   cursor: pointer;
   color: #233323;
+  
 }
 
 .dropdown-button:hover {
   color: #000;
+  
 }
 
 .dropdown-content {
@@ -288,7 +291,6 @@ form{
   color: white;
 }
 
-/* Search bar styling */
 .search-container {
   text-align: center;
   margin-top: 20px;

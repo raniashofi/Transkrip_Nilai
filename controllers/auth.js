@@ -79,7 +79,6 @@ exports.Login = async (req, res) => {
 
 exports.getProfile = async (req, res) => {
   try {
-    // Assuming user ID is stored in req.userId (this would typically come from a middleware that verifies the JWT)
     const nim_nip = req.userNim_nip;
 
     const user = await User.findOne({
@@ -90,7 +89,6 @@ exports.getProfile = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Render the profile page with user data
     res.render("admin/profile", {
       user: user,
     });
@@ -111,7 +109,7 @@ exports.getProfileMhs = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    console.log("User data:", user); // Log user data to verify its content
+    console.log("User data:", user);
 
     return {
       nama: user.nama,
@@ -138,7 +136,7 @@ exports.getProfileDosen = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    console.log("User data:", user); // Log user data to verify its content
+    console.log("User data:", user);
 
     res.render("dosen/profile", {
       user: {

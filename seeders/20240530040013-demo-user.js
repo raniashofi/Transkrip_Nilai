@@ -9,7 +9,7 @@ module.exports = {
       await queryInterface.bulkInsert('users', [
         {
         email: 'dosen1@unand.ac.id',
-        password: await bcrypt.hash('dosen', 10), // Hashed password for 'dosen'
+        password: await bcrypt.hash('dosen', 10), 
         role: 'dosen',
         nama: 'Dosen1',
         nim_nip: '123456789',
@@ -20,7 +20,7 @@ module.exports = {
       },
       {
         email: 'dosen2@unand.ac.id',
-        password: await bcrypt.hash('dosen', 10), // Hashed password for 'dosen'
+        password: await bcrypt.hash('dosen', 10), 
         role: 'dosen',
         nama: 'Dosen2',
         nim_nip: '234567890',
@@ -31,7 +31,7 @@ module.exports = {
       },
       {
         email: 'dosen3@unand.ac.id',
-        password: await bcrypt.hash('dosen', 10), // Hashed password for 'dosen'
+        password: await bcrypt.hash('dosen', 10), 
         role: 'dosen',
         nama: 'Dosen3',
         nim_nip: '345678901',
@@ -42,7 +42,7 @@ module.exports = {
       },
       {
         email: 'dosen4@unand.ac.id',
-        password: await bcrypt.hash('dosen', 10), // Hashed password for 'dosen'
+        password: await bcrypt.hash('dosen', 10), 
         role: 'dosen',
         nama: 'Dosen4',
         nim_nip: '456789012',
@@ -53,7 +53,7 @@ module.exports = {
       },
       {
         email: 'dosen5@unand.ac.id',
-        password: await bcrypt.hash('dosen', 10), // Hashed password for 'dosen'
+        password: await bcrypt.hash('dosen', 10), 
         role: 'dosen',
         nama: 'Dosen5',
         nim_nip: '567890123',
@@ -64,7 +64,7 @@ module.exports = {
       },
       {
         email: 'admin@unand.ac.id',
-        password: await bcrypt.hash('admin', 10), // Hashed password for 'admin'
+        password: await bcrypt.hash('admin', 10), 
         role: 'admin',
         nama: 'Admin JSI',
         nim_nip: 'Admin JSI',
@@ -75,7 +75,7 @@ module.exports = {
       },
       {
         email: '2211521004_nadia@unand.ac.id',
-        password: await bcrypt.hash('mahasiswa', 10), // Hashed password for 'mahasiswa'
+        password: await bcrypt.hash('mahasiswa', 10), 
         role: 'mahasiswa',
         nama: 'Nadia Deari Hanifah',
         nim_nip: '2211521004',
@@ -92,7 +92,7 @@ module.exports = {
       },
       {
         email: '2211521002_najla@unand.ac.id',
-        password: await bcrypt.hash('mahasiswa', 10), // Hashed password for 'mahasiswa'
+        password: await bcrypt.hash('mahasiswa', 10), 
         role: 'mahasiswa',
         nama: 'Najla Humaira',
         nim_nip: '2211521002',
@@ -109,7 +109,7 @@ module.exports = {
       },
       {
         email: '2211523010_azhra@unand.ac.id',
-        password: await bcrypt.hash('mahasiswa', 10), // Hashed password for 'mahasiswa'
+        password: await bcrypt.hash('mahasiswa', 10), 
         role: 'mahasiswa',
         nama: 'Azhra Meisa Khairani',
         nim_nip: '2211523010',
@@ -126,7 +126,7 @@ module.exports = {
       },
       {
         email: '2211523014_rania@unand.ac.id',
-        password: await bcrypt.hash('mahasiswa', 10), // Hashed password for 'mahasiswa'
+        password: await bcrypt.hash('mahasiswa', 10), 
         role: 'mahasiswa',
         nama: 'Rania Shofi Malika',
         nim_nip: '2211523014',
@@ -143,7 +143,7 @@ module.exports = {
       },
       {
         email: '2211523016_zhafira@unand.ac.id',
-        password: await bcrypt.hash('mahasiswa2', 10), // Hashed password for 'mahasiswa'
+        password: await bcrypt.hash('mahasiswa2', 10), 
         role: 'mahasiswa',
         nama: 'Mahasiswa 2',
         nim_nip: '2211523016',

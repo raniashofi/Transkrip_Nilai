@@ -63,7 +63,7 @@ module.exports = {
       nama_matkul: 'Pengantar Bisnis dan Manajemen',
       sks: 2,
     },
-    //smt 2
+  
     {
       kode_matkul: 'JSI/2/201/A',
       nama_matkul: 'Interaksi Manusia dan Komputer',

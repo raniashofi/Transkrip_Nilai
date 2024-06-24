@@ -18,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
 			nim_nip: {
 				type: DataTypes.STRING,
 				references: {
-					model: 'Users', // name of Target model
-					key: 'nim_nip', // key in Target model that we're referencing
+					model: 'Users', 
+					key: 'nim_nip', 
 				},
 			},
 			nilai_huruf: {
@@ -31,8 +31,8 @@ module.exports = (sequelize, DataTypes) => {
 			kode_matkul: {
 				type: DataTypes.STRING,
 				references: {
-					model: 'MataKuliahs', // name of Target model
-					key: 'kode_matkul', // key in Target model that we're referencing
+					model: 'MataKuliahs', 
+					key: 'kode_matkul',
 				},
 			},
 			tahun_ajaran: {
