@@ -84,7 +84,6 @@ exports.updateNilai = async (req, res) => {
 			{ nilai_huruf: 'E', base_nilai: 0.0 },
 		];
 
-		// validate kode matkul
 		const detailMataKuliah = await DetailMataKuliah.findOne({
 			where: {
 				nim_nip: userNim_nip,
@@ -97,7 +96,6 @@ exports.updateNilai = async (req, res) => {
 			);
 		}
 
-		// validate tahun ajaran
 		const tahunAjaran = await TahunAjaran.findOne({
 			where: {
 				tahun_ajaran,
@@ -107,7 +105,6 @@ exports.updateNilai = async (req, res) => {
 			throw new Error('Tahun Ajaran tidak ditemukan');
 		}
 
-		// validate mata kuliah
 		const mataKuliah = await MataKuliah.findOne({
 			where: {
 				kode_matkul,
